@@ -1,35 +1,43 @@
 #!/usr/bin/env sh
 #
 # DESCRIPTION:
-#   This a simple script that loads an ASCII art
-#   in the origin path of this script.
+#   This a simple script that loads an ASCII art in the origin path of this script.
 #
-#   It will look for art that can be loaded in
-#   the terminal size. So I do recommend you to have multiple arts.
+#   It will look for art that can be loaded in the terminal size.
+#   So I do recommend you to have multiple arts.
 #
-#   If you want nincat to print faster, then just use a POSIX-compliant
-#   shell, I do recommend dash (which as 4x faster than bash).
+#   If you want nincat to print faster, then just use a POSIX-compliant shell,
+#   I do recommend dash (which as 4x faster than bash).
 #
 # NOTE:
 #   This is heavily inspired by shell-colors-scripts project made by DT
 #   His video about shell-colors-scripts:
 #     https://www.youtube.com/watch?v=8Z1OKN6TgxI
 #
-#   Filenames are made in this format:
-#     <name-of-art> <rows-size-of-art> <columns-size-of-art>
-#   Yes, it does contain spaces.
-#   With lolcat support:
-#   <name-of-art>_lolcat <rows-size-of-art> <columns-size-of-art>
-#
 #   In this code on the awk call, there is a math operation with rows and '- 1'
 #   This one is the prompt of your shell, if it's two lines, then you should 
 #   change to '- 2'. Honestly, I don't see necessity of using two lines to a 
 #   prompt, so for now, it will be altered manually and not a variable or 
 #   argument to this script.
+#
+# ADDING NEW ASCII ARTS:
+#   Filenames are made in this format:
+#     <name-of-art> <rows-size-of-art> <columns-size-of-art>
+#   Yes, it does contain spaces.
+#   With lolcat support, you add '_lolcatcat' after the name:
+#   <name-of-art>_lolcat <rows-size-of-art> <columns-size-of-art>
+#
+#   Please, do not forgot to fill all the lines with spaces to close all columns
+#   For example (treat double quotes as the limit).
+#     "   (   )   "
+#     ": ) o_o ( :"
+#
+#   if you do not want to count the rows and columns of your file, just run the
+#   update script called 'update_ascii_arts'.
 #   
 # FEATURES:
 #   + A single run for every command
-#   + Fast and lightweight (2 SLOC : lmao)
+#   + Fast and lightweight
 #   + Self adapt with the terminal size to print only ASCII arts that fit
 #   + Supports lolcart arts (if there's programs like lolcat, we can support it,
 #     too :)
@@ -42,15 +50,32 @@
 #     - Please, use the faster implentation (https://github.com/jaseg/lolcat)
 #     - If you want to, you can disable this dependency by
 #       just removing the 'lolcat' folder in 'ascii_arts' in the root.
-#   
+#
+# FIXME:
+#   + In the awk call, make it starts from the reverse order because
+#     right now, if the path contains spaces, it won't get ir correctly.
+#
 # MAINTAINER:
 #   BeyondMagic : 2021- : koetemagie@gmail.com
 #
 # GPL3 © 2021 : github.com/BeyondMagic/nincat
 
-# Select a art
-selected="$(find ""$(cd -- "$(dirname "$0")" >/dev/null 2>&1 && pwd -P)"/ascii_arts/" -type f | \
-  shuf | awk "(\$2 <= $(($(tput lines) - 1))) && (\$3 <= $(tput cols))" | head -n1)"
+columns=$(tput cols)
 
-# If it did find a art, then print it
-[ "$selected" ] && printf '%b' "$(fcat "$selected")"  || exit 0
+# Select a art
+selected="$(find \
+  ""$(cd -- "$(dirname "$0")" >/dev/null 2>&1 && pwd -P)"/ascii_arts/" -type f | \
+  shuf | awk "(\$2 <= $(($(tput lines) - 1))) && (\$3 <= $columns)" | head -n1)"
+
+# Did not find?
+[ "$selected" ] || exit 0 && {
+
+art="$(fcat "$selected" | \
+  sed "s/^/$(printf %$((columns/2 - $(printf "$selected" | grep -oE '[^ ]+$')))s | tr ' ' ' ')/")"
+
+  # If there isn't lolcat, then it will use the first printf
+  [ $(printf "$selected" | grep -c 'lolcat') = 0 ] && \
+    printf "$art\n\033[0m" || \
+    printf "$art\n" | lolcat
+
+} || exit 0
