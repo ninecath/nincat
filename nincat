@@ -51,10 +51,6 @@
 #     - If you want to, you can disable this dependency by
 #       just removing the 'lolcat' folder in 'ascii_arts' in the root.
 #
-# FIXME:
-#   + In the awk call, make it starts from the reverse order because
-#     right now, if the path contains spaces, it won't get ir correctly.
-#
 # MAINTAINER:
 #   BeyondMagic : 2021- : koetemagie@gmail.com
 #
@@ -65,7 +61,7 @@ columns=$(tput cols)
 # Select a art
 selected="$(find \
   ""$(cd -- "$(dirname "$0")" >/dev/null 2>&1 && pwd -P)"/ascii_arts/" -type f -size +0 | \
-  shuf | awk "(\$2 <= $(($(tput lines) - 1))) && (\$3 <= $columns)" | head -n1)"
+  shuf | awk "(\$(NF-1) <= $(($(tput lines) - 1))) && (\$NF <= $columns)" | head -n1)"
 
 # Did not find?
 [ "$selected" ] || exit 0 && {
