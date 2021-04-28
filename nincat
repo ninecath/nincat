@@ -68,7 +68,7 @@ selected="$(find \
   shuf | awk "(\$(NF-1) <= $(($(tput lines) - 1))) && (\$NF <= $columns)" | head -n1)"
 
 # Did not find?
-[ "$selected" ] || exit 0 && {
+[ "$selected" ] && {
 
 art="$(fcat "$selected" | \
   sed "s/^/$(printf %$((columns/2 - $(printf "$selected" | grep -oE '[^ ]+$')))s | tr ' ' ' ')/")"
