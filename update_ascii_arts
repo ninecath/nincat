@@ -1,0 +1,97 @@
+#!/usr/bin/env sh
+#
+# DESCRIPTION:
+#   This scripts will update the names of all the ASCII arts with their current
+#   columns and rows size, this will NOT alter the files, just their names.
+#   If a file is not with the correct number of columns, it will warn you.
+#
+#   It will look for art that can be loaded in the terminal size.
+#   So I do recommend you to have multiple arts.
+#
+#   If you want nincat to print faster, then just use a POSIX-compliant shell,
+#   I do recommend dash (which as 4x faster than bash).
+#
+# NOTE:
+#   See section 'ADDING NEW ASCII ARTS' of nincat.
+# 
+# DEPENDENCIES:
+#   + fcat (recommended)
+#     - Faster implementation of cat
+#   
+# MAINTAINER:
+#   BeyondMagic : 2021- : koetemagie@gmail.com
+#
+# GPL3 © 2021 : github.com/BeyondMagic/nincat
+
+
+# Colours
+r="\033[91m"; R="\033[0m"
+
+# Origin path of this script
+origin="$(cd -- "$(dirname "$0")" >/dev/null 2>&1 && pwd -P)"
+
+# Disable if you don't want to use fcat
+alias cat='fcat'
+
+# Get all arts
+printf "$(find "$origin/ascii_arts/" -type f)" | \
+  while IFS="" read -r art_path || [ -n "$art_path" ]; do
+
+    # Remove all colours code
+    art="$(fcat "$art_path" | sed -r 's/\\033\[[[:digit:]]{1,}m//g')"
+
+    [ "$art" ] && {
+
+         rows_art=$(printf "$art_path" | awk '{ print $(NF-1) }')
+      columns_art=$(printf "$art_path" | grep -oE '[^ ]+$')
+
+      # Verify if both variables are numbers
+      if [ "$rows_art" -gt 0 ] && [ "$columns_art" -gt 0 ] >/dev/null 2>&1; then
+        
+           true_rows=$(printf "$art\n" | wc -l)
+        true_columns=$(printf "$art\n" | awk '{ print length }' | sort -n | tail -1)
+
+        # Loop through the file
+        i=1; printf "$art" | while IFS="" read -r art_line || [ -n "$art_line" ]; do
+
+          # If column is different
+          [ $(printf "$art_line" | wc -m) = $true_columns ] || \
+            printf "$r[COLUMN]:$R '$art_path' line $i has less characters than '$true_columns'.\n"
+        
+        i=$((i+1));done
+
+        # Fix file name
+        # Verify rows
+        [ $true_rows = $rows_art ] || {
+          printf "$r[ROWS]:$R It uses '$rows_art', but has '$true_rows'. Fixing.\n"
+          art_path_new="$(printf "$art_path" | awk 'NF{NF-=2}1') $true_rows $true_columns"
+          mv "$art_path" "$art_path_new"
+          art_path="$art_path_new"
+          unset art_path_new
+        }
+
+        # Verify columns
+        [ $true_columns = $columns_art ] || {
+          printf "$r[COLUMNS]:$R '$art_path' uses '$columns_art', but has '$true_columns'. Fixing.\n"
+          mv "$art_path" "$(printf "$art_path" | awk 'NF{NF-=2}1') $true_rows $true_columns"
+        }
+
+      # Wrong filename format...
+      else
+        printf "$r[FILENAME]:$R '$art_path' uses wrong filename's format.! Moving it. Ignore the error above.\n"
+        mkdir -p "$origin/wrong_arts"
+        mv "$art_path" "$origin/wrong_arts/"
+      fi
+
+    # If the file is emptyy
+    } || {
+
+      printf "$r[EMPTY]:$R file '$art_path' is empty!\n"
+      mkdir -p "$origin/wrong_arts"
+      mv "$art_path" "$origin/wrong_arts/"
+
+    }
+
+done
+
+printf "Please, note that this script won't change the files, you have to do by yourself.\nRun this script after you change the arts or if you want, just change the name accordinly to the columns and rows of your file.\n"
