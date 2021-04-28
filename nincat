@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 #
 # DESCRIPTION:
-#   This a simple script that loads an ASCII art in the origin path of this script.
+#   This a simple script that loads an ASCII art in the origin path of this.
 #
 #   It will look for art that can be loaded in the terminal size.
 #   So I do recommend you to have multiple arts.
@@ -19,6 +19,10 @@
 #   change to '- 2'. Honestly, I don't see necessity of using two lines to a 
 #   prompt, so for now, it will be altered manually and not a variable or 
 #   argument to this script.
+#
+#   Give a look at this site for colours in your ASCII arts:
+#     https://misc.flogisoft.com/bash/tip_colors_and_formatting
+#   If you want to submit your art after, please use "\033" instead of "\e"
 #
 # ADDING NEW ASCII ARTS:
 #   Filenames are made in this format:
