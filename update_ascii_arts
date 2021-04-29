@@ -51,17 +51,17 @@ printf "$(find "$origin/ascii_arts/" -type f)" | \
            true_rows=$(printf "$art\n" | wc -l)
         true_columns=$(printf "$art\n" | awk '{ print length }' | sort -n | tail -1)
 
-        # Loop through the file
-        i=1; printf "$art" | while IFS="" read -r art_line || [ -n "$art_line" ]; do
+        # If there are trailing spaces in the ASCII art, remove it
+        [ $(printf "$art" | grep -cE ' +$') = 0 ] || {
 
-          # If column is different
-          [ $(printf "$art_line" | wc -m) = $true_columns ] || \
-            printf "$r[COLUMN]:$R '$art_path' line $i has less characters than '$true_columns'.\n"
-        
-        i=$((i+1));done
+          printf "$r[COLUMN(s)]:$R '$art_path' line(s) have more characters than '$true_columns'. Fixing\n"
+          sed -ri 's/ +$//' "$art_path"
+          art="$(fcat "$art_path" | sed -r 's/\\033\[[[:digit:]]{1,}m//g')"
+          true_columns=$(printf "$art\n" | awk '{ print length }' | sort -n | tail -1)
 
-        # Fix file name
-        # Verify rows
+        }
+
+        # Verify rows (names)
         [ $true_rows = $rows_art ] || {
           printf "$r[ROWS]:$R It uses '$rows_art', but has '$true_rows'. Fixing.\n"
           art_path_new="$(printf "$art_path" | awk 'NF{NF-=2}1') $true_rows $true_columns"
@@ -70,7 +70,7 @@ printf "$(find "$origin/ascii_arts/" -type f)" | \
           unset art_path_new
         }
 
-        # Verify columns
+        # Verify columns (name)
         [ $true_columns = $columns_art ] || {
           printf "$r[COLUMNS]:$R '$art_path' uses '$columns_art', but has '$true_columns'. Fixing.\n"
           mv "$art_path" "$(printf "$art_path" | awk 'NF{NF-=2}1') $true_rows $true_columns"
@@ -93,5 +93,3 @@ printf "$(find "$origin/ascii_arts/" -type f)" | \
     }
 
 done
-
-printf "Please, note that this script won't change the files, you have to do by yourself.\nRun this script after you change the arts or if you want, just change the name accordinly to the columns and rows of your file.\n"
