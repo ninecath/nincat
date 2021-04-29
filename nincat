@@ -71,7 +71,7 @@ selected="$(find \
 [ "$selected" ] && {
 
 art="$(fcat "$selected" | \
-  sed "s/^/$(printf %$((columns/2 - $(printf "$selected" | grep -oE '[^ ]+$')))s | tr ' ' ' ')/")"
+  sed "s/^/$(printf %$(( (columns - $(printf "$selected" | grep -oE '[^ ]+$'))/2 ))s)/")"
 
   # If there isn't lolcat, then it will use the first printf
   [ $(printf "$selected" | grep -c 'lolcat') = 0 ] && \
