@@ -13,10 +13,6 @@
 #
 # NOTE:
 #   See section 'ADDING NEW ASCII ARTS' of nincat.
-# 
-# DEPENDENCIES:
-#   + fcat (recommended)
-#     - Faster implementation of cat
 #   
 # MAINTAINER:
 #   BeyondMagic : 2021- : koetemagie@gmail.com
@@ -30,15 +26,12 @@ r="\033[91m"; R="\033[0m"
 # Origin path of this script
 origin="$(cd -- "$(dirname "$0")" >/dev/null 2>&1 && pwd -P)"
 
-# Disable if you don't want to use fcat
-alias cat='fcat'
-
 # Get all arts
 printf "$(find "$origin/ascii_arts/" -type f)" | \
   while IFS="" read -r art_path || [ -n "$art_path" ]; do
 
     # Remove all colours code
-    art="$(fcat "$art_path" | sed -r 's/\\033\[[[:digit:]]{1,}m//g')"
+    art="$(sed -r 's/\\033\[[[:digit:]]{1,}m//g' "$art_path")"
 
     [ "$art" ] && {
 
@@ -56,7 +49,7 @@ printf "$(find "$origin/ascii_arts/" -type f)" | \
 
           printf "$r[COLUMN(s)]:$R '$art_path' line(s) have more characters than '$true_columns'. Fixing\n"
           sed -ri 's/ +$//' "$art_path"
-          art="$(fcat "$art_path" | sed -r 's/\\033\[[[:digit:]]{1,}m//g')"
+          art="$(sed -r 's/\\033\[[[:digit:]]{1,}m//g' "$art_path")"
           true_columns=$(printf "$art\n" | awk '{ print length }' | sort -n | tail -1)
 
         }
