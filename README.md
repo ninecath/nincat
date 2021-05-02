@@ -21,7 +21,7 @@
 ## DEPENDENCIES:
 + **lolcat** (optional)
   - [Please, use its faster implentation](https://github.com/jaseg/lolcat)
-  - So, if you want to, you can disable this dependency by just removing the 'lolcat' folder in `ascii_arts` in the root. And if you know a little bit of shell scripting, remove its condition on the script file.
+  - So, if you want to, you can disable this dependency by just removing the `lolcat` folder in `ascii_arts` in the root. And if you know a little bit of shell scripting, remove its condition on the script file.
 
 ---
 
@@ -57,5 +57,7 @@ So I created this for a faster and easier way to contribute with ASCII arts.
 
 ---
 
-<a align="center" href="/LICENSE"><b>GPL3 License</b></a>
+<p align="center">
+  <a href="/LICENSE"><b>GPL3 License</b></a>
+</p>
 
