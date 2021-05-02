@@ -67,10 +67,11 @@ selected="$(find \
   # 2. Math operation will find the number to add characters to a line and
   #    center it.
   # 3. 'printf' will print the spaces to center the string with loop.
-  # 4. 'sed' will append as prefix to all lines of the file.
-  art="$(sed "s/^/$(printf %$((\
-    (columns - $(printf "$selected" | grep -oE '[^ ]+$'))\
-    / 2 ))s)/" "$selected")"
+  # 4. 'sed' will append as prefix to all lines of the file and delete the 1st
+  #     line that is supposed to be your name/username, etc.
+  art="$(sed -e "s/^/$(printf %$(( \
+    (columns - $(printf "$selected" | grep -oE '[^ ]+$')) / 2 ))s)/" \
+    -e '1d' "$selected")"
 
   # If it finds 'lolcat' on the path, then print with the 'lolcat' random
   # If not, then it will printf normally with a reset colour and background
