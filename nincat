@@ -20,16 +20,25 @@
 #
 # GPL3 © 2021 : github.com/BeyondMagic/nincat
 
+path_script="$(cd -- "$(dirname "$0")" >/dev/null 2>&1 && pwd -P)"
+
 columns=$(tput cols)
 
-# Select a art
+# Select art
 selected="$(find \
-  ""$(cd -- "$(dirname "$0")" >/dev/null 2>&1 && pwd -P)"/ascii_arts/" -type f -size +0 | \
-  shuf | awk "(\$(NF-1) <= $(($(tput lines) - 1))) && (\$NF <= $columns)" | head -n1)"
+  "$path_script/ascii_arts/" \
+  -type f -size +0 | \
+   awk "(\$(NF-1) <= $(($(tput lines) - 1))) && (\$NF <= $columns)" | \
+   shuf | head -n1)"
 
 # Did not find?
 [ "$selected" ] && {
 
+  # Print name
+  #printf "$selected\n" | sed "s*$path_script/ascii_arts/**" | \
+  #  awk '{print $(NF-2), $(NF-1), $NF}'
+
+  # Get our art from path
   art="$(sed "s/^/$(printf %$((\
     (columns - $(printf "$selected" | grep -oE '[^ ]+$'))\
     / 2 ))s)/" "$selected")"
