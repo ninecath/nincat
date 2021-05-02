@@ -1,43 +1,82 @@
 #!/usr/bin/env sh
 #
 # DESCRIPTION:
-#   This a simple script that loads an ASCII art in the origin path of this.
+#   This a simple script that loads an ASCII art centered in your terminal.
 #
 #   It will look for art that can be loaded in the terminal size.
 #   So I do recommend you to have multiple arts.
 #
 #   If you want nincat to print faster, then just use a POSIX-compliant shell,
 #   I do recommend dash (which as 4x faster than bash).
+#   
+# TODO:
+#   ? GETOPS (fast implementation);
+#   ? Support HEX colours (true colours);
+#   ? File with list of names to ignore arts!
+#   ? List all arts by filename and second-paths;
 #
-# MAINTAINER:
+# NOTE:
+#   Keep the current syntax for developing!
+#
+# MAINTAINER(s):
 #   BeyondMagic : 2021- : koetemagie@gmail.com
 #
 # GPL3 © 2021 : github.com/BeyondMagic/nincat
 
+# Path of this script, it will use a fast and simple way to go to the path and
+# get from there using 'pwd -P'. If you want to set an absolute path, I'd 
+# recommend you to put in somewhere that you can update to get new arts!
+# Obviosuly if you call it with an enviroment variable, as `path_script`, it 
+# will override.
 path_script="$(cd -- "$(dirname "$0")" >/dev/null 2>&1 && pwd -P)"
 
+# Columns of terminal, it may be worth noticing that MAYBE $COLUMNS and $lines
+# can be a better alternative because if the program is faster than the tiling
+# window manager, it will get wrong columns and lines. Since $COLUMNS is slower
+# to get. Let's see if in the future something happens and we resolve it by
+# adding it.
 columns=$(tput cols)
 
-# Select art
+# Select a random art that fits in the terminal size.
+# 1. 'find' will get all ASCII art paths in this directory that are not empty;
+# 2. 'awk' will get only the files that can fit in this terminal based only
+#    the name;
+# 3. 'shuf' will randomize the list
+# 4. 'head' will get the first file of the list.
 selected="$(find \
   "$path_script/ascii_arts/" \
   -type f -size +0 | \
    awk "(\$(NF-1) <= $(($(tput lines) - 1))) && (\$NF <= $columns)" | \
    shuf | head -n1)"
 
-# Did not find?
+# This block of code will only execute if an ASCII art is found, note that it 
+# you can added a command to exit with an error, like it didn't find something
+# with '|| exit 1' at the end of the block or after this condition in the next
+# line.
 [ "$selected" ] && {
 
-  # Print name
-  #printf "$selected\n" | sed "s*$path_script/ascii_arts/**" | \
-  #  awk '{print $(NF-2), $(NF-1), $NF}'
+  # Print the name of the file, you can add $NF to print certain fields, if you
+  # just want the name, remove the $(NF-2), $(NF-1) for that.
+  # If you want the full path, remove the sed call in the following 2 lines:
+  printf "$selected\n" | sed "s*$path_script/ascii_arts/**" | \
+    awk '{print $(NF-2), $(NF-1), $NF}'
 
-  # Get our art from path
+  # This will print the art to a variable.
+  # Importante execution order:
+  # 1. 'printf' will get columns of the filename with grep (faster than awk).
+  # 2. Math operation will find the number to add characters to a line and
+  #    center it.
+  # 3. 'printf' will print the spaces to center the string with loop.
+  # 4. 'sed' will append as prefix to all lines of the file.
   art="$(sed "s/^/$(printf %$((\
     (columns - $(printf "$selected" | grep -oE '[^ ]+$'))\
     / 2 ))s)/" "$selected")"
 
-  # If there isn't lolcat, then it will use the first printf
+  # If it finds 'lolcat' on the path, then print with the 'lolcat' random
+  # If not, then it will printf normally with a reset colour and background
+  # after the art.
+  # Change the 'lolcat' optiions if you want something different as some
+  # lolcat(s) have less/more options.
   [ $(printf "$selected" | grep -c 'lolcat') = 0 ] && \
     printf "$art\n\033[0m" || \
     printf "$art\n" | lolcat -r
