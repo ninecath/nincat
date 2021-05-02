@@ -8,7 +8,7 @@
 
 ---
 
-## FEATURES:
+## 🌟 FEATURES:
 + Fast and lightweight;
 + A single run for almost every command, except `printf` and `grep` **Щ(◣д◢)Щ**;
 + Self adapt with the terminal size to print only ASCII arts that fit;
@@ -18,7 +18,7 @@
 
 ---
 
-## DEPENDENCIES:
+## 😫 DEPENDENCIES:
 + **lolcat** (optional)
   - [Please, use its faster implentation](https://github.com/jaseg/lolcat)
   - So, if you want to, you can disable this dependency by just removing the `lolcat` folder in `ascii_arts` in the root. And if you know a little bit of shell scripting, remove its condition on the script file.
@@ -29,12 +29,13 @@
   <img align="center" src="/.github/new_art.png" alt="Preview of one ASCII art with lolcat."/>
 </p>
 
-## ADDING NEW ASCII ARTS:
+## ✏️  ADDING NEW ASCII ARTS:
 
 Filenames are made in this format: `<name-of-art> <rows-size-of-art> <columns-size-of-art>`. **Yes, it does contain spaces, do not forget it, it's important!** They are put in the `/ascii_arts/`. You can make a separate folder to add your own arts.
 
 Please, do not fill all the lines with spaces to close all columns. A good and simple example should be:
 ```
+# Your wonderful username/name and/or extra information
    (   )
 : ) o_o ( :
 ```
@@ -47,9 +48,25 @@ If you added colours on you art, remember that you do not have to put a' reset c
 [Give a look at this site for colours in your ASCII arts](https://misc.flogisoft.com/bash/tip_colors_and_formatting).
 And obviously, I ask you to utilize `\033` instead of `\e` as the site shows!.
 
+### 💞 Please, contribute!
+
+It would be lovely that for every art you add, you add it here, too! Remember to put your name in the first line, so your contribution is never forgetten :)
+
+#### By Github's Issue
+
+Create a new issue in the `New art` option and put there your art.
+
+#### By Github's Pull Request
+
+Clone this project, add your art in a file in either manually with **Github** or with **git**, then send a pull request here comparing both branches.
+
+#### Literally email
+
+Send an email to `koetemagie@gmail.com` with your art, do not forget to put your name in the first line and email. If you forgot, I will add it for you :)
+
 ---
 
-## NOTE:
+## ❗ NOTE:
 
 This is heavily inspired by [**shell-colors-scripts**](https://gitlab.com/dwt1/shell-color-scripts/-/tree/master) (project made by DT. [His video about **shell-colors-scripts**](https://www.youtube.com/watch?v=8Z1OKN6TgxI).
 

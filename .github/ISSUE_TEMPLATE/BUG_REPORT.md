@@ -1,6 +1,6 @@
 ---
 name: Bug report ᑦ(⁎ᐡᆺᐡ)ᐣ 
-about: Report a problem in nincat
+about: Report a problem in nincat.
 labels: 'bug'
 assignees: beyondmagic
 
