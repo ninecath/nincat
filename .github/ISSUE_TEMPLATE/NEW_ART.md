@@ -1,6 +1,6 @@
 ---
-name: New Art
-about: New art (｡･ө･｡) for nincat to print out
+name: New Art (｡･ө･｡)
+about: New art for nincat to print out
 title: 'NEW ART: <filename>'
 labels: 'art'
 assignees: beyondmagic
