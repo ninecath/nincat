@@ -8,12 +8,6 @@
 #
 #   If you want nincat to print faster, then just use a POSIX-compliant shell,
 #   I do recommend dash (which as 4x faster than bash).
-# 
-# DEPENDENCIES:
-#   + lolcat (optional)
-#     - Please, use the faster implentation (https://github.com/jaseg/lolcat)
-#     - If you want to, you can disable this dependency by
-#       just removing the 'lolcat' folder in 'ascii_arts' in the root.
 #
 # MAINTAINER:
 #   BeyondMagic : 2021- : koetemagie@gmail.com
@@ -48,4 +42,4 @@ selected="$(find \
     printf "$art\n\033[0m" || \
     printf "$art\n" | lolcat -r
 
-} || exit 0
+}
