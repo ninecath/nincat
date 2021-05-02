@@ -1,4 +1,6 @@
-<img src="/.github/preview.png" alt="Preview of one ASCII art in ST." align="center"/>
+<p align="center">
+  <img src="/.github/preview.png" alt="Preview of one ASCII art in ST.">
+</p>
 
 <p align="center"><b>Let's revive the ASCII art!</b></p>
 
@@ -23,7 +25,9 @@
 
 ---
 
-<img align="center" src="/.github/new_art.png" alt="Preview of one ASCII art with lolcat."/>
+<p align="center">
+  <img align="center" src="/.github/new_art.png" alt="Preview of one ASCII art with lolcat."/>
+</p>
 
 ## ADDING NEW ASCII ARTS:
 
@@ -54,3 +58,4 @@ So I created this for a faster and easier way to contribute with ASCII arts.
 ---
 
 <a align="center" href="/LICENSE"><b>GPL3 License</b></a>
+
