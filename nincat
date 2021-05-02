@@ -8,48 +8,8 @@
 #
 #   If you want nincat to print faster, then just use a POSIX-compliant shell,
 #   I do recommend dash (which as 4x faster than bash).
-#
-# NOTE:
-#   This is heavily inspired by shell-colors-scripts project made by DT
-#   His video about shell-colors-scripts:
-#     https://www.youtube.com/watch?v=8Z1OKN6TgxI
-#
-#   In this code on the awk call, there is a math operation with rows and '- 1'
-#   This one is the prompt of your shell, if it's two lines, then you should 
-#   change to '- 2'. Honestly, I don't see necessity of using two lines to a 
-#   prompt, so for now, it will be altered manually and not a variable or 
-#   argument to this script.
-#
-#   Give a look at this site for colours in your ASCII arts:
-#     https://misc.flogisoft.com/bash/tip_colors_and_formatting
-#   If you want to submit your art after, please use "\033" instead of "\e"
-#
-# ADDING NEW ASCII ARTS:
-#   Filenames are made in this format:
-#     <name-of-art> <rows-size-of-art> <columns-size-of-art>
-#   Yes, it does contain spaces.
-#   With lolcat support, you add '_lolcatcat' after the name:
-#   <name-of-art>_lolcat <rows-size-of-art> <columns-size-of-art>
-#
-#   Please, do not forgot to fill all the lines with spaces to close all columns
-#   For example (treat double quotes as the limit).
-#     "   (   )   "
-#     ": ) o_o ( :"
-#
-#   if you do not want to count the rows and columns of your file, just run the
-#   update script called 'update_ascii_arts'.
-#   
-# FEATURES:
-#   + A single run for every command
-#   + Fast and lightweight
-#   + Self adapt with the terminal size to print only ASCII arts that fit
-#   + Supports lolcart arts (if there's programs like lolcat, we can support it,
-#     too :)
-#   + Skip empty ASCII art files
 # 
 # DEPENDENCIES:
-#   + fcat (recommended)
-#     - Faster implementation of cat
 #   + lolcat (optional)
 #     - Please, use the faster implentation (https://github.com/jaseg/lolcat)
 #     - If you want to, you can disable this dependency by
@@ -70,8 +30,9 @@ selected="$(find \
 # Did not find?
 [ "$selected" ] && {
 
-art="$(fcat "$selected" | \
-  sed "s/^/$(printf %$(( (columns - $(printf "$selected" | grep -oE '[^ ]+$'))/2 ))s)/")"
+  art="$(sed "s/^/$(printf %$((\
+    (columns - $(printf "$selected" | grep -oE '[^ ]+$'))\
+    / 2 ))s)/" "$selected")"
 
   # If there isn't lolcat, then it will use the first printf
   [ $(printf "$selected" | grep -c 'lolcat') = 0 ] && \
