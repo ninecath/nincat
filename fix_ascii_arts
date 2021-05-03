@@ -28,12 +28,12 @@ origin_arts="$(cd -- "$(dirname "$0")" >/dev/null 2>&1 && pwd -P)/ascii_arts/"
 
 # Get all arts paths with find, note that this is counting empty files because
 # it will move to `wrong_arts` to not make your path dirty.
-printf "$(find "$origin_arts" -type f)" | \
-  while IFS="" read -r art_path || [ -n "$art_path" ]; do
+# Loop through all the arts path that it found in the variable `all_arts`
+find "$origin_arts" -type f | while IFS="" read -r art_path || [ -n "$art_path" ]; do
 
     # Remove all colours code of the art. This is important to count the real
     # value of columns later on. So, please do not remove the sed call!
-    art="$(sed -r 's/\\033\[[[:digit:]]{1,}m//g' "$art_path")"
+    art="$(sed -re 's/\\033\[[[:digit:]]{1,}m//g' -e '1d' "$art_path")"
 
     # Obviusly, if there's pure emptyness in the file, then we will move it.
     # Be careful with this because it won't count if there's a single
@@ -52,6 +52,8 @@ printf "$(find "$origin_arts" -type f)" | \
         true_rows=$(printf "$art\n" | wc -l)
       true_columns=$(printf "$art\n" | awk '{ print length }' | \
         sort -n | tail -1)
+
+      # TODO: Verify if there's a first comment and move it if there isn't.
 
       # Verify if the variable of rows are numbers
       # TODO: make a beter way to fit both (I'm lazy now)
@@ -150,3 +152,7 @@ printf "$(find "$origin_arts" -type f)" | \
   }
 
 done
+
+# Just print out a little bit of information about nincat actually :)
+echo "nincat has the total of $(find "$origin_arts" -type f | wc -l) arts." \
+  "Let's keep growing :)"
