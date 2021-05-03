@@ -12,8 +12,7 @@
 # TODO:
 #   ? GETOPS (fast implementation);
 #   ? Support HEX colours (true colours);
-#   ? File with list of names to ignore arts!
-#   ? List all arts by filename and second-paths;
+#   ? File with list of names to ignore certain arts! faster than O(n)
 #
 # NOTE:
 #   Keep the current syntax for developing!
@@ -37,15 +36,22 @@ path_script="$(cd -- "$(dirname "$0")" >/dev/null 2>&1 && pwd -P)"
 # adding it.
 columns=$(tput cols)
 
+# Print all the arts files that it finds with the `find` command, it will print
+# the name after the root directory. You can uncomment the 3 following lines
+# if you want to see all the arts and their names. This may be useful to the
+# day that we add a `.ignorearts` file to keep updating without overriding 
+# the arst that we changed or updated.
+find "$path_script/ascii_arts/" -type f -size +0 | \
+  sed "s*$path_script/ascii_arts/**" | \
+  awk '{print $(NF-2), $(NF-1), $NF}'; exit 0
+
 # Select a random art that fits in the terminal size.
 # 1. 'find' will get all ASCII art paths in this directory that are not empty;
 # 2. 'awk' will get only the files that can fit in this terminal based only
 #    the name;
 # 3. 'shuf' will randomize the list
 # 4. 'head' will get the first file of the list.
-selected="$(find \
-  "$path_script/ascii_arts/" \
-  -type f -size +0 | \
+selected="$(find "$path_script/ascii_arts/" -type f -size +0 | \
    awk "(\$(NF-1) <= $(($(tput lines) - 1))) && (\$NF <= $columns)" | \
    shuf | head -n1)"
 
