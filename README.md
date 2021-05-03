@@ -14,6 +14,9 @@
 + Self adapt with the terminal size to print only ASCII arts that fit;
 + Supports **lolcat** arts (if there's more programs like **lolcat**, we can support it, too :)
 + Skip empty ASCII art files;
++ You can select an art directly;
++ List all ASCII art's paths (by option);
++ Print the name of printed art (by option);
 + We'll always give you more, baby!
 
 ---
@@ -79,6 +82,12 @@ yay -s nincat-git
 ...
 
 -->
+
+----
+
+## Options
+
+nincat provides different options inside its script, and each one with a `NOTE` call. Give a look at `NOTE 3` to print all arts and `NOTE 7` to print the filename's secondpath.
 
 ---
 
