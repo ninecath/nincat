@@ -56,7 +56,7 @@ find "$origin_arts" -type f | \
       # character being a space, so make your files and arts correctly.
       [ "$art" ] && {
   
-        # Get thee rows provided by the filesname, this servers for us TODO
+        # Get the rows provided by the filesname, this servers for us to
         # verify later if those variables are true. And yes, it's an awk call
         # and a grep call.
            rows_art=$(printf "$art_path" | awk '{ print $(NF-1) }')
