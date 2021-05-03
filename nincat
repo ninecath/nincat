@@ -110,6 +110,5 @@ columns=$(tput cols)
   # lolcat(s) have less/more options.
   [ $(printf "$selected" | grep -c 'lolcat') = 0 ] && \
     printf "$art\n\033[0m" || \
-    printf "$art\n" | lolcat -r
-
+    printf "$art\n" | lolcat -r -h 0.95 -v 0.95
 }
