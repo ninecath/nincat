@@ -1,5 +1,5 @@
 ---
-name: New Art (｡･ө･｡)
+name: New art (｡･ө･｡)
 about: New art for nincat to print out.
 title: 'NEW ART: <filename>'
 labels: 'art'
