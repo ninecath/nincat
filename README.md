@@ -113,13 +113,13 @@ Please, do not fill all the lines with spaces to close all columns. A good and s
 : ) o_o ( :
 ```
 
-**Please, run the "update_ascii_arts" script if you want to make sure your file is correctly put!**
+**Please, run the `fix_ascii_arts` script if you want to make sure your file is correctly put!**
 
-Because If you do not want to count the rows and columns of your file, just run the update script called `/update_ascii_arts` in the root path.
+Because If you do not want to count the rows and columns of your file, just run the update script called `/fix_ascii_arts` in the root path.
 If you added colours on you art, remember that you do not have to put a' reset colour' after it. nincat will do that for you.
 
 [Give a look at this site for colours in your ASCII arts](https://misc.flogisoft.com/bash/tip_colors_and_formatting).
-And obviously, I ask you to utilize `\033` instead of `\e` as the site shows!.
+And obviously, you should utilize `\033` instead of `\e`.
 
 ### 💞 Please, contribute!
 
