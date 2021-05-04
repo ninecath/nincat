@@ -8,7 +8,7 @@
 #
 #   If you want nincat to print faster, then just use a POSIX-compliant shell,
 #   I do recommend dash (which as 4x faster than bash).
-#   
+# 
 # TODO:
 #   ? GETOPS (fast implementation) (high doubt I will add this)
 #   ? Support HEX colours (true colours) (maybe?)
@@ -41,9 +41,9 @@ columns=$(tput cols)
 # NOTE 3:
 # Print all the arts files that it finds with the `find` command, it will
 # print the name after the root directory. This may be useful to the day
-# that we add a `.ignorearts` file to keep
-# updating without overriding the arst that we changed or updated.
-# Verify if the file exists and then put its path if it does.
+# that we add a `.ignorearts` file to keep updating without overriding the arst
+# that we changed or updated. Verify if the file exists and then put its path
+# if it does.
 #find "$path_script/ascii_arts/" -type f -size +0 | \
 #  sed "s*$path_script/ascii_arts/**" | \
 #  awk '{print $(NF-2), $(NF-1), $NF}'; exit 0
@@ -106,9 +106,9 @@ columns=$(tput cols)
   # If it finds 'lolcat' on the path, then print with the 'lolcat' random
   # If not, then it will printf normally with a reset colour and background
   # after the art.
-  # Change the 'lolcat' optiions if you want something different as some
+  # Change the 'lolcat' options if you want something different as some
   # lolcat(s) have less/more options.
   [ $(printf "$selected" | grep -c 'lolcat') = 0 ] && \
     printf "$art\n\033[0m" || \
-    printf "$art\n" | lolcat -r -h 0.95 -v 0.95
+    printf "$art\n" | lolcat -r -h 0.95 -v 0.95 -b
 }
