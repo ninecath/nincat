@@ -20,7 +20,7 @@
 # GPL3 © 2021 : github.com/BeyondMagic/nincat
 
 # Colours for printing out the errors, please just change the 
-r="\033[91m"; R="\033[0m"
+r="\033[91m"; R="\033[0m"; g="\033[92m"
 
 # Origin path of this script, the same way nincat treat this, you can change
 # it to an absolute path.
@@ -32,140 +32,142 @@ origin_arts="$(cd -- "$(dirname "$0")" >/dev/null 2>&1 && pwd -P)/ascii_arts/"
 find "$origin_arts" -type f | \
   while IFS="" read -r art_path || [ -n "$art_path" ]; do
 
+    # Destroy variables of past line in the loop
+    unset true_columns true_rows columns_art rows_art
+
     # Remove all colours code of the art. This is important to count the real
     # value of columns later on. So, please do not remove the sed call!
     art="$(sed -re 's/\\033\[[[:digit:]]{1,}m//g' "$art_path")"
 
-    # Verify if there's a first comment and move it to the wrong_arts 
-    # folder if there isn't. Quite simple, right?!
-    [ $(printf "$art" | head -n1 | grep -cE '^#.+' ) = 0 ] && {
+    # Obviusly, if there's pure emptyness in the file, then we will move it.
+    # Be careful with this because it won't count if there's a single
+    # character being a space, so make your files and arts correctly.
+    [ "$art" ] && {
 
-      separate_folder="$origin_arts../wrong_arts"
-      echo "$r[CREDITS]:$R file '$art_path' doesn't have credits!" \
-        "Moving it to $separate_folder"
-      mkdir -p "$separate_folder"
-      mv -i "$art_path" "$separate_folder" 
-
-    # If everything's fine with the file's credits 
-    } || {
-
+      # Verify if there's a first comment and move it to the wrong_arts 
+      # folder if there isn't. Quite simple, right?!
+      [ $(printf "$art" | head -n1 | grep -cE '^#.+' ) = 0 ] && {
+  
+        separate_folder="$origin_arts../wrong_arts"
+        echo "$r[CREDITS]:$R file '$art_path' doesn't have credits!" \
+          "Moving it to $separate_folder"
+        mkdir -p "$separate_folder"
+        mv -i "$art_path" "$separate_folder" 
+  
+      }
+  
+      # Print again art, now without the first line :) 
       art="$(printf "$art" | sed '1d')"
+ 
+      # Get the rows provided by the filesname, this servers for us to
+      # verify later if those variables are true. And yes, it's an awk call
+      # and a grep call.
+         rows_art=$(printf "$art_path" | awk '{ print $(NF-1) }')
+      columns_art=$(printf "$art_path" | grep -oE '[^ ]+$')
+
+      # Get the real and true values of rows and columns of the file by
+      # counting the columns of the largest line for columns.
+      # And by counting the number of lines with 'wc'
+        true_rows=$(printf "$art\n" | wc -l)
+      true_columns=$(printf "$art\n" | awk '{ print length }' | \
+        sort -n | tail -1)
+
+      # If there are trailing spaces in the ASCII art, remove it
+      [ $(printf "$art" | grep -cE ' +$') = 0 ] || {
   
-      # Obviusly, if there's pure emptyness in the file, then we will move it.
-      # Be careful with this because it won't count if there's a single
-      # character being a space, so make your files and arts correctly.
-      [ "$art" ] && {
-  
-        # Get the rows provided by the filesname, this servers for us to
-        # verify later if those variables are true. And yes, it's an awk call
-        # and a grep call.
-           rows_art=$(printf "$art_path" | awk '{ print $(NF-1) }')
-        columns_art=$(printf "$art_path" | grep -oE '[^ ]+$')
-  
-        # Get the real and true values of rows and columns of the file by
-        # counting the columns of the largest line for columns.
-        # And by counting the number of lines with 'wc'
-          true_rows=$(printf "$art\n" | wc -l)
+        echo "$g[COLUMN(s)]:$R '$art_path'" \
+          "line(s) have more characters than '$true_columns'. Fixing."
+        sed -ri 's/ +$//' "$art_path"
+        art="$(sed -re 's/\\033\[[[:digit:]]{1,}m//g' "$art_path" -e '1d')"
         true_columns=$(printf "$art\n" | awk '{ print length }' | \
           sort -n | tail -1)
   
-        # Verify if the variable of rows are numbers
-        # TODO: make a beter way to fit both (I'm lazy now)
-        [ "$rows_art" -gt 0  ] || {
-          
-          # Echo error warning
-          echo "$r[FILENAME]:$R '$art_path'" \
-            "uses wrong filename's format for rows!" \
-            "Fixing it. Ignore the error above."
-  
-          # Get a new path based on the filesname, the dirname path and
-          # obviously sed will get only the first name of your file,
-          # nothing after the spaces.
-          art_path_new="$(dirname "$art_path")/$(printf "$art_path" | \
-            sed -r 's*(.+/)|( .+)**g') $true_rows $true_columns"
-  
-          mv -i "$art_path" "$art_path_new"
-          art_path="$art_path_new"
-          unset art_path_new
-  
-          # Get again the rows provided by the filesname, this servers for us
-          # to verify later if those variables are true. And yes, it's an awk
-          # and grep call.
-             rows_art=$(printf "$art_path" | awk '{ print $(NF-1) }')
-          columns_art=$(printf "$art_path" | grep -oE '[^ ]+$')
-  
-        }
-  
-        # Verify if the variable of columns are numbers
-        # TODO: make a beter way to fit both (I'm lazy now)
-        [ "$columns_art" -gt 0 ] || {
-          echo "$r[FILENAME]:$R '$art_path'" \
-            "uses wrong filename's format for columns!" \
-            "Fixing it. Ignore the error above."
-  
-          # Get a new path based on the filesname, the dirname path and
-          # obviosuly sed will get only the first name of your file, nothing 
-          # after the spaces.
-          art_path_new="$(dirname "$art_path")/$(printf "$art_path" | \
-            sed -r 's*(.+/)|( .+)**g') $true_rows $true_columns"
-  
-          mv -i "$art_path" "$art_path_new"
-          art_path="$art_path_new"
-          unset art_path_new
-  
-          # Get again the rows provided by the filesname, this servers for us
-          # to verify later if those variables are true. And yes, it's an awk
-          # and grep call.
-             rows_art=$(printf "$art_path" | awk '{ print $(NF-1) }')
-          columns_art=$(printf "$art_path" | grep -oE '[^ ]+$')
-        }
-  
-        # If there are trailing spaces in the ASCII art, remove it
-        [ $(printf "$art" | grep -cE ' +$') = 0 ] || {
-  
-          echo "$r[COLUMN(s)]:$R '$art_path'" \
-            "line(s) have more characters than '$true_columns'. Fixing"
-          sed -ri 's/ +$//' "$art_path"
-          art="$(sed -r 's/\\033\[[[:digit:]]{1,}m//g' "$art_path")"
-          true_columns=$(printf "$art\n" | awk '{ print length }' | \
-            sort -n | tail -1)
-  
-        }
-  
-        # Verify rows (filename) and fixes based on it.
-        [ $true_rows = $rows_art ] || {
-  
-          echo "$r[ROWS]:$R It uses '$rows_art'," \
-            "but has '$true_rows'. Fixing.\n"
-          art_path_new="$(printf "$art_path" | \
-            awk 'NF{NF-=2}1') $true_rows $true_columns"
-          mv -i "$art_path" "$art_path_new"
-          art_path="$art_path_new"
-          unset art_path_new
-  
-        }
-  
-        # Verify columns (filename) and fixes based on it.
-        [ $true_columns = $columns_art ] || {
-  
-          printf "$r[COLUMNS]:$R '-$art_path'"
-            "uses '$columns_art', but has '$true_columns'. Fixing.\n"
-          mv -i "$art_path" "$(printf "$art_path" | \
-            awk 'NF{NF-=2}1') $true_rows $true_columns"
-  
-        }
+      }
+
+      # Verify if the variable of rows are numbers
+      # TODO: make a beter way to fit both (I'm lazy now)
+      [ "$rows_art" -gt 0  ] || {
+        
+        # Echo error warning
+        echo "$g[FILENAME]:$R '$art_path'" \
+          "uses wrong filename's format for rows!" \
+          "Fixing it. Ignore the error above."
+
+        # Get a new path based on the filesname, the dirname path and
+        # obviously sed will get only the first name of your file,
+        # nothing after the spaces.
+        art_path_new="$(dirname "$art_path")/$(printf "$art_path" | \
+          sed -r 's*(.+/)|( .+)**g') $true_rows $true_columns"
+
+        mv -i "$art_path" "$art_path_new"
+        art_path="$art_path_new"
+        unset art_path_new
+
+        # Get again the rows provided by the filesname, this servers for us
+        # to verify later if those variables are true. And yes, it's an awk
+        # and grep call.
+           rows_art=$(printf "$art_path" | awk '{ print $(NF-1) }')
+        columns_art=$(printf "$art_path" | grep -oE '[^ ]+$')
+
+      }
+
+      # Verify if the variable of columns are numbers
+      # TODO: make a beter way to fit both (I'm lazy now)
+      [ "$columns_art" -gt 0 ] || {
+        echo "$g[FILENAME]:$R '$art_path'" \
+          "uses wrong filename's format for columns!" \
+          "Fixing it. Ignore the error above."
+
+        # Get a new path based on the filesname, the dirname path and
+        # obviosuly sed will get only the first name of your file, nothing 
+        # after the spaces.
+        art_path_new="$(dirname "$art_path")/$(printf "$art_path" | \
+          sed -r 's*(.+/)|( .+)**g') $true_rows $true_columns"
+
+        mv -i "$art_path" "$art_path_new"
+        art_path="$art_path_new"
+        unset art_path_new
+
+        # Get again the rows provided by the filesname, this servers for us
+        # to verify later if those variables are true. And yes, it's an awk
+        # and grep call.
+           rows_art=$(printf "$art_path" | awk '{ print $(NF-1) }')
+        columns_art=$(printf "$art_path" | grep -oE '[^ ]+$')
+      }
+
+      # Verify rows (filename) and fixes based on it.
+      [ $true_rows = $rows_art ] || {
+
+        echo "$g[ROWS]:$R '$art_path' uses '$rows_art'," \
+          "but has '$true_rows'. Fixing.\n"
+        art_path_new="$(printf "$art_path" | \
+          awk 'NF{NF-=2}1') $true_rows $true_columns"
+        mv -i "$art_path" "$art_path_new"
+        art_path="$art_path_new"
+        unset art_path_new
+
+      }
+
+      # Verify columns (filename) and fixes based on it.
+      [ $true_columns = $columns_art ] || {
+
+        echo "$g[COLUMNS]:$R '-$art_path'" \
+          "uses '$columns_art', but has '$true_columns'. Fixing."
+        mv -i "$art_path" "$(printf "$art_path" | \
+          awk 'NF{NF-=2}1') $true_rows $true_columns"
+
+      }
+
+    # Put the empty file in a separate folder called `wrong_arts` above
+    # `ascii_arts` folder. 
+    } || {
+
+      separate_folder="$origin_arts../wrong_arts"
+      echo "$r[EMPTY]:$R file '$art_path' is empty! Moving it to $separate_folder"
+      mkdir -p "$separate_folder"
+      mv -i "$art_path" "$separate_folder" 
+
     }
-
-  # Put the empty file in a separate folder called `wrong_arts` above
-  # `ascii_arts` folder. 
-  } || {
-
-    separate_folder="$origin_arts../wrong_arts"
-    echo "$r[EMPTY]:$R file '$art_path' is empty! Moving it to $separate_folder"
-    mkdir -p "$separate_folder"
-    mv -i "$art_path" "$separate_folder" 
-
-  }
 
 done
 
