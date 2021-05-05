@@ -58,7 +58,7 @@ LOCATION_OF_NINCAT/nincat
 Give a look at the script itself if you want to enable a few things, for example, printing out all the **ASCII** filenames or the filename before printing its art.
 
 
-**TIP**: Faster is better, if have the `dash` shell installed in your machine, consider using it (it's 4x faster than bash and considered the fastest shell) with the following line:
+**TIP**: Faster is better, if you have the `dash` shell installed in your machine, consider using it (it's 4x faster than bash and considered the fastest shell) with the following line:
 ```zsh
 dash LOCATION_OF_NINCAT/nincat
 ```
