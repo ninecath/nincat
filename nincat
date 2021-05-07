@@ -99,7 +99,7 @@ columns=$(tput cols)
   # 4. 'sed' will append as prefix to all lines of the file and delete the 1st
   #     line that is supposed to be your name/username, etc.
   art="$(sed -e "s/^/$(printf %$(( \
-    (columns - $(printf "$selected" | grep -oE '[^ ]+$')) / 2 ))s)/" \
+    (columns - 1 - $(printf "$selected" | grep -oE '[^ ]+$')) / 2 ))s)/" \
     -e '1d' "$selected")"
 
   # NOTE 9:
