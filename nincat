@@ -67,7 +67,7 @@ columns=$(tput cols)
   # 3. 'shuf' will randomize the list
   # 4. 'head' will get the first file of the list.
   selected="$(find "$path_script/ascii_arts/" -type f -size +0 | \
-    awk "(\$(NF-1) <= $(($(tput lines) - 1))) && (\$NF <= $columns)" | \
+    awk "(\$(NF-1) < $(($(tput lines)))) && (\$NF < $columns)" | \
     shuf | head -n1)"
 
 
@@ -99,7 +99,7 @@ columns=$(tput cols)
   # 4. 'sed' will append as prefix to all lines of the file and delete the 1st
   #     line that is supposed to be your name/username, etc.
   art="$(sed -e "s/^/$(printf %$(( \
-    (columns - 1 - $(printf "$selected" | grep -oE '[^ ]+$')) / 2 ))s)/" \
+    (columns - $(printf "$selected" | grep -oE '[^ ]+$')) / 2 ))s)/" \
     -e '1d' "$selected")"
 
   # NOTE 9:
