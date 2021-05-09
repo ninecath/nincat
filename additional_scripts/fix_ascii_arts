@@ -24,7 +24,7 @@ r="\033[91m"; R="\033[0m"; g="\033[92m"
 
 # Origin path of this script, the same way nincat treat this, you can change
 # it to an absolute path.
-origin_arts="$(cd -- "$(dirname "$0")" >/dev/null 2>&1 && pwd -P)/ascii_arts/"
+origin_arts="$(cd -- "$(dirname "$0")" >/dev/null 2>&1 && pwd -P)/../ascii_arts/"
 
 # Get all arts paths with find, note that this is counting empty files because
 # it will move to `wrong_arts` to not make your path dirty.
