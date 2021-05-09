@@ -67,7 +67,7 @@ columns=$(tput cols)
   # 3. 'shuf' will randomize the list
   # 4. 'head' will get the first file of the list.
   selected="$(find "$path_script/ascii_arts/" -type f -size +0 | \
-    awk "(\$(NF-1) < $(($(tput lines)))) && (\$NF < $columns)" | \
+    awk "(\$(NF-1) < $(($(tput lines) - 1))) && (\$NF < $columns)" | \
     shuf | head -n1)"
 
 
@@ -109,6 +109,6 @@ columns=$(tput cols)
   # Change the 'lolcat' options if you want something different as some
   # lolcat(s) have less/more options.
   [ $(printf "$selected" | grep -c 'lolcat') = 0 ] && \
-    printf "$art\n\033[0m" || \
-    printf "$art\n" | lolcat -r -h 0.95 -v 0.95 -b
+    echo "$art\n\033[0m" || \
+    echo "$art\n" | lolcat -r -h 0.95 -v 0.95 -b
 }
