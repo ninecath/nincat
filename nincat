@@ -67,7 +67,7 @@ columns=$(tput cols)
   # 3. 'shuf' will randomize the list
   # 4. 'head' will get the first file of the list.
   selected="$(find "$path_script/ascii_arts/" -type f -size +0 | \
-    awk "(\$(NF-1) < $(($(tput lines) - 1))) && (\$NF < $columns)" | \
+    awk "(\$(NF-1) < $(tput lines)) && (\$NF < $((columns - 2)))" | \
     shuf | head -n1)"
 
 
