@@ -83,10 +83,13 @@ yay -s nincat-git
 
 ## Options
 
+Tree of arguments:
+
 + `random` or `r` : print a random ASCII arts that fits in your terminal;
+  - `see` or `s` : prints the path of the ASCII art that it finds.
 + `list` or `l` : print the secondpath of all ASCII arts;
 + `view` or `v` : 
-  - `$2` : the secondpath of the ASCII art (use **list** in doubt);
+  - `$2` : the secondpath of the ASCII art (use **list** in doubt).
 
 ----
 
