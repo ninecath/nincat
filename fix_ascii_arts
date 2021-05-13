@@ -24,7 +24,7 @@ r="\033[91m"; R="\033[0m"; g="\033[92m"
 
 # Origin path of this script, the same way nincat treat this, you can change
 # it to an absolute path.
-origin_arts="$(cd -- "$(dirname "$0")" >/dev/null 2>&1 && pwd -P)/../ascii_arts/"
+origin_arts="$(cd -- "$(dirname "$0")" >/dev/null 2>&1 && pwd -P)/ascii_arts/"
 
 # Get all arts paths with find, note that this is counting empty files because
 # it will move to `wrong_arts` to not make your path dirty.
@@ -46,7 +46,7 @@ find "$origin_arts" -type f | \
 
       # Verify if there's a first comment and move it to the wrong_arts 
       # folder if there isn't. Quite simple, right?!
-      [ $(printf "$art" | head -n1 | grep -cE '^#.+' ) = 0 ] && {
+      [ $(echo "$art" | head -n1 | grep -cE '^#.+' ) = 0 ] && {
   
         separate_folder="$origin_arts../wrong_arts"
         echo "$r[CREDITS]:$R file '$art_path' doesn't have credits!" \
@@ -57,7 +57,7 @@ find "$origin_arts" -type f | \
       }
   
       # Print again art, now without the first line :) 
-      art="$(printf "$art" | sed '1d')"
+      art="$(echo "$art" | sed '1d')"
  
       # Get the rows provided by the filesname, this servers for us to
       # verify later if those variables are true. And yes, it's an awk call
@@ -68,18 +68,18 @@ find "$origin_arts" -type f | \
       # Get the real and true values of rows and columns of the file by
       # counting the columns of the largest line for columns.
       # And by counting the number of lines with 'wc'
-        true_rows=$(printf "$art\n" | wc -l)
-      true_columns=$(printf "$art\n" | awk '{ print length }' | \
+        true_rows=$(echo "$art" | wc -l)
+      true_columns=$(echo "$art" | awk '{ print length }' | \
         sort -n | tail -1)
 
       # If there are trailing spaces in the ASCII art, remove it
-      [ $(printf "$art" | grep -cE ' +$') = 0 ] || {
+      [ $(echo "$art" | grep -cE ' +$') = 0 ] || {
   
         echo "$g[COLUMN(s)]:$R '$art_path'" \
           "line(s) have more characters than '$true_columns'. Fixing."
         sed -ri 's/ +$//' "$art_path"
         art="$(sed -re 's/\\033\[[[:digit:]]{1,}m//g' "$art_path" -e '1d')"
-        true_columns=$(printf "$art\n" | awk '{ print length }' | \
+        true_columns=$(echo -E "$art" | awk '{ print length }' | \
           sort -n | tail -1)
   
       }
