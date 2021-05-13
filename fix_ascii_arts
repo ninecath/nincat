@@ -1,5 +1,8 @@
 #!/usr/bin/env sh
 #
+# VERSION:
+#   2.0
+#
 # DESCRIPTION:
 #   This scripts will update the names of all the ASCII arts with their current
 #   columns and rows size, this will NOT alter the files, just their names.
