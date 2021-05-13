@@ -9,12 +9,11 @@
 ---
 
 ## 🌟 Features:
-+ Fast and lightweight;
-+ A single run for almost every command, except `printf` and `grep` **Щ(◣д◢)Щ**;
++ Fast as it can be and lightweight;
 + Self adapt with the terminal size to print only ASCII arts that fit;
 + Supports **lolcat** arts (if there's more programs like **lolcat**, we can support it, too :)
 + Skip empty ASCII art files;
-+ You can select an art directly;
++ You can select an art directly (by option);
 + List all ASCII art's paths (by option);
 + Print the name of printed art (by option);
 + We'll always give you more, baby!
@@ -52,15 +51,12 @@ To verify what shell you use, run `echo $SHELL` in your terminal.
 + etc... search for the documentation of your shell if it isn't listed here.
 
 ```zsh
-LOCATION_OF_NINCAT/nincat
+LOCATION_OF_NINCAT/nincat random
 ```
-
-Give a look at the script itself if you want to enable a few things, for example, printing out all the **ASCII** filenames or the filename before printing its art.
-
 
 **TIP**: Faster is better, if you have the `dash` shell installed in your machine, consider using it (it's 4x faster than bash and considered the fastest shell) with the following line:
 ```zsh
-dash LOCATION_OF_NINCAT/nincat
+dash LOCATION_OF_NINCAT/nincat random
 ```
 
 In **Arch Linux (...based ditros)** you can use `pacman -S dash` to install it.
@@ -87,16 +83,19 @@ yay -s nincat-git
 
 ## Options
 
-nincat provides different options inside its script, and each one with a `NOTE` call. Give a look at `NOTE 3` to print all arts and `NOTE 7` to print the filename's secondpath.
++ `random` or `r` : print a random ASCII arts that fits in your terminal;
++ `list` or `l` : print the secondpath of all ASCII arts;
++ `view` or `v` : 
+  - `$2` : the secondpath of the ASCII art (use **list** in doubt);
 
----
+----
 
 ## 😪 Dependencies:
 + **lolcat** (optional)
   - [Please, use its faster implentation](https://github.com/jaseg/lolcat)
   - So, if you want to, you can disable this dependency by just removing the `lolcat` folder in `ascii_arts` in the root. And if you know a little bit of shell scripting, remove its condition on the script file.
 
----
+----
 
 <p align="center">
   <img align="center" src="/.github/new_art.png" alt="Preview of one ASCII art with lolcat."/>
