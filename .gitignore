@@ -1,1 +1,7 @@
 wrong_arts
+PKGBUILD
+.SRCINFO
+src
+*.zst
+pkg
+nincat-git

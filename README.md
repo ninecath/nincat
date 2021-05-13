@@ -36,7 +36,8 @@ yay -S nincat-git
 Click in `Code` in this repository and then `Download ZIP`. Extract it using your favourite tool and then in your terminal: 
 ```zsh
 cd PUT_HERE_THE_PATH_OF_NINCAT
-./nincat
+./make
+nincat
 ```
 
 ### By Git
@@ -45,7 +46,8 @@ From your terminal, you can clone in your preferred folder:
 ```zsh
 git clone 'https://github.com/BeyondMagic/nincat.git'
 cd nincat
-./nincat
+./make
+nincat
 ```
 
 ### Loading it
@@ -60,12 +62,13 @@ To verify what shell you use, run `echo $SHELL` in your terminal.
 + etc... search for the documentation of your shell if it isn't listed here.
 
 ```zsh
-LOCATION_OF_NINCAT/nincat random
+nincat random
 ```
 
 **TIP**: Faster is better, if you have the `dash` shell installed in your machine, consider using it (it's 4x faster than bash and considered the fastest shell) with the following line:
 ```zsh
-dash LOCATION_OF_NINCAT/nincat random
+dash $(which nincat) random see
+dash LOCATION_OF_NINCAT/nincat/ random
 ```
 
 In **Arch Linux (...based ditros)** you can use `pacman -S dash` to install it.
