@@ -22,7 +22,16 @@
 
 ## ⚡ Installing
 
-#### By Github
+### Arch Linux (...based distros)
+
+With an AUR helper, you can install it with the package called `nincat-git`.
+E.j. with yay:
+
+```zsh
+yay -S nincat-git
+```
+
+### By Github
 
 Click in `Code` in this repository and then `Download ZIP`. Extract it using your favourite tool and then in your terminal: 
 ```zsh
@@ -30,7 +39,7 @@ cd PUT_HERE_THE_PATH_OF_NINCAT
 ./nincat
 ```
 
-#### By Git
+### By Git
 
 From your terminal, you can clone in your preferred folder:
 ```zsh
@@ -62,22 +71,6 @@ dash LOCATION_OF_NINCAT/nincat random
 In **Arch Linux (...based ditros)** you can use `pacman -S dash` to install it.
 
 I'd recommend, too, you putting the line in the top of your shell.
-
-<!-- ### Arch Linux (...based distros)
-
-With an AUR helper, you can install it with the package called `nincat-git`.
-E.j. with yay:
-
-```zsh
-yay -s nincat-git
-```
--->
-
-<!-- ## Updating:
-
-...
-
--->
 
 ----
 
