@@ -84,8 +84,9 @@ Tree of arguments:
 + `random` or `r` : print a random ASCII arts that fits in your terminal;
   - `see` or `s` : prints the path of the ASCII art that it finds.
 + `list` or `l` : print the secondpath of all ASCII arts;
-+ `view` or `v` : 
++ `view` or `v` : view an ASCII art;
   - `$2` : the secondpath of the ASCII art (use **list** in doubt).
++ `help` or `h` : help list of commands;
 
 ----
 
