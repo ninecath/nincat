@@ -164,12 +164,12 @@ case "$1" in
 
     echo \
       "\n\033[1mnincat help with arguments in a tree list\033[0m\n" \
-      " + random <r>     : show a random ASCII art\n" \
-      "   - see <s>        : show the secondpath of the art\n" \
-      " + list <l>       : print the secondpath of all ASCII arts\n" \
-      " + view <v>       : print an ASCII art based on the secondpath\n" \
-      "   + \"\$2\"        : secondpath of the art to print\n" \
-      " + help <h>       : shows this\n"
+      "   random <r>     : show a random ASCII art\n" \
+			"			 see <s>        : (optional) show the secondpath of the art\n" \
+      "   list <l>       : print the secondpath of all ASCII arts\n" \
+      "   view <v>       : print an ASCII art based on the secondpath\n" \
+      "			 \"\$2\"        : secondpath of the art to print\n" \
+      "		help <h>       : shows this\n"
 
     exit 0
 
