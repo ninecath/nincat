@@ -12,6 +12,7 @@
 + Fast as it can be and lightweight;
 + Self adapt with the terminal size to print only ASCII arts that fit;
 + Supports **lolcat** arts (if there's more programs like **lolcat**, we can support it, too :)
++ Supports HEX colour arts or background, 256 colours, 88 colours, 16 colour;
 + Skip empty ASCII art files;
 + You can select an art directly (by option);
 + List all ASCII art's paths (by option);
@@ -117,8 +118,12 @@ Please, do not fill all the lines with spaces to close all columns. A good and s
 Because If you do not want to count the rows and columns of your file, just run the update script called `/fix_ascii_arts` in the root path.
 If you added colours on you art, remember that you do not have to put a' reset colour' after it. nincat will do that for you.
 
-[Give a look at this site for colours in your ASCII arts](https://misc.flogisoft.com/bash/tip_colors_and_formatting).
+##### Colours
+
+[Give a look at this site for **256, 88, 16 colours** in your ASCII arts](https://misc.flogisoft.com/bash/tip_colors_and_formatting).
 And obviously, you should utilize `\033` instead of `\e`.
+
+For **true colours**, [I'd recommend this](https://stackoverflow.com/questions/4842424/list-of-ansi-color-escape-sequences).
 
 ### 💞 Please, contribute!
 
