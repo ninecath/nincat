@@ -40,8 +40,8 @@ find "$origin_arts" -type f | \
 
     # Remove all colours code of the art. This is important to count the real
     # value of columns later on. So, please do not remove the sed call!
-    art="$(sed -re 's/\\033\[[[:digit:]]{1,}m//g' "$art_path")"
-
+    art="$(sed -r 's/\\033\[(([[:digit:]]+;)+|)[[:digit:]]+m//g' "$art_path")"
+									 
     # Obviously, if there's pure emptiness in the file, then we will move it.
     # Be careful with this because it won't count if there's a single
     # character being a space, so make your files and arts correctly.
@@ -76,16 +76,16 @@ find "$origin_arts" -type f | \
         sort -n | tail -1)
 
       # If there are trailing spaces in the ASCII art, remove it
-      [ $(echo "$art" | grep -cE ' +$') = 0 ] || {
+      # [ $(echo "$art" | grep -cE ' +$') = 0 ] || {
   
-        echo "$g[COLUMN(s)]:$R '$art_path'" \
-          "line(s) have more characters than '$true_columns'. Fixing."
-        sed -ri 's/ +$//' "$art_path"
-        art="$(sed -re 's/\\033\[[[:digit:]]{1,}m//g' "$art_path" -e '1d')"
-        true_columns=$(echo -E "$art" | awk '{ print length }' | \
-          sort -n | tail -1)
+      #  echo "$g[COLUMN(s)]:$R '$art_path'" \
+      #    "line(s) have more characters than '$true_columns'. Fixing."
+      #  sed -ri 's/ +$//' "$art_path"
+      #  art="$(sed -re 's/\\033\[[[:digit:]]{1,}m//g' "$art_path" -e '1d')"
+      #  true_columns=$(echo -E "$art" | awk '{ print length }' | \
+      #    sort -n | tail -1)
   
-      }
+      # }
 
       # Verify if the variable of rows are numbers
       # TODO: make a better way to fit both (I'm lazy now)
