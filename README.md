@@ -4,7 +4,7 @@
 
 <p align="center"><b>Let's revive the ASCII art!</b></p>
 
-<p align="center">This a simple script that loads an ASCII art centered in your terminal.</p>
+<p align="center">Nincat is community-driven project that loads an ASCII art centred in your terminal.</p>
 
 ---
 
@@ -12,7 +12,7 @@
 + Fast as it can be and lightweight;
 + Self adapt with the terminal size to print only ASCII arts that fit;
 + Supports **lolcat** arts (if there's more programs like **lolcat**, we can support it, too :)
-+ Supports HEX colour arts or background, 256 colours, 88 colours, 16 colour;
++ Supports HEX colour foreground/background arts and 256 colours, 88 colours, 16 colours;
 + Skip empty ASCII art files;
 + You can select an art directly (by option);
 + List all ASCII art's paths (by option);
