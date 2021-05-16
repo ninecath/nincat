@@ -4,7 +4,7 @@
 #   2.0
 #
 # DESCRIPTION:
-#   This a simple script that loads an ASCII art centered in your terminal.
+#   This a simple script that loads an ASCII art centred in your terminal.
 #
 #   It will look for art that can be loaded in the terminal size.
 #   So I do recommend you to have multiple arts.
@@ -14,7 +14,7 @@
 # 
 # TODO:
 #   ? Support HEX colours (true colours) (maybe?)
-#   + File with list of names to ignore certain arts! faster than O(n)
+#   + File with list of names to ignore certain arts! Faster than O(n)
 #
 # NOTE:
 #   Keep the current syntax for developing!
@@ -28,7 +28,7 @@
 # Path of this script, it will use a fast and simple way to go to the path and
 # get from there using 'pwd -P'. If you want to set an absolute path, I'd 
 # recommend you to put in somewhere that you can update to get new arts!
-# Obviosuly if you call it with an enviroment variable, as `path_script`, it 
+# Obviously if you call it with an environment variable, as `path_script`, it 
 # will override.
 path_script="$(cd -- "$(dirname "$0")" >/dev/null 2>&1 && pwd -P)/ascii_arts"
 
@@ -39,9 +39,9 @@ ppp() {
 
   # NOTE 2.1:
   # This will print the art to a variable.
-  # Importante execution order:
+  # Important execution order:
   # 1. 'printf' will get columns of the filename with grep (faster than awk).
-  # 2. Math operation will find the number to add characters to a line and
+  # 2. An operation will find the number to add characters to a line and
   #    center it.
   # 3. 'printf' will print the spaces to center the string with loop.
   # 4. 'sed' will append as prefix to all lines of the file and delete the 1st
@@ -49,6 +49,7 @@ ppp() {
   art="$(sed -e "s/^/$(printf %$(( \
     ($1 - $(printf "$selected" | grep -oE '[^ ]+$')) / 2 ))s)/" \
     -e '1d' "$selected")"
+  #art="$(sed -e '1d' "$selected")"
 
   # NOTE 2.2:
   # If it finds 'lolcat' on the path, then print with the 'lolcat' random
@@ -56,9 +57,9 @@ ppp() {
   # after the art.
   # Change the 'lolcat' options if you want something different as some
   # lolcat(s) have less/more options.
-  [ $(printf "$selected" | grep -c 'lolcat') = 0 ] && \
-    echo "$art\033[0m" || \
-    echo "$art" | lolcat -r -b -v 0.02 -h 0.02
+  [ $(printf "$selected" | grep -c 'lolcat') = 0 ] \
+		&& echo "$art\033[0m" \
+		|| echo "$art" | lolcat -r -b -v 0.02 -h 0.02
 
   exit 0
 
@@ -104,7 +105,7 @@ case "$1" in
     }
 
     # NOTE 3.2.2:
-    # Send columns of the terminal to `ppp` (print ASCII art function). see
+    # Send columns of the terminal to `ppp` (print ASCII art function). See
     # note 2 about it.
     ppp $(tput cols)
 
@@ -159,7 +160,7 @@ case "$1" in
   ;;
 
   # NOTE 3.4:
-  # Help command, show a list wtih what can be run by nincat and version.
+  # Help command, show a list with what can be run by nincat and version.
   help | h)
 
     echo \

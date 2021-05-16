@@ -42,7 +42,7 @@ find "$origin_arts" -type f | \
     # value of columns later on. So, please do not remove the sed call!
     art="$(sed -re 's/\\033\[[[:digit:]]{1,}m//g' "$art_path")"
 
-    # Obviusly, if there's pure emptyness in the file, then we will move it.
+    # Obviously, if there's pure emptiness in the file, then we will move it.
     # Be careful with this because it won't count if there's a single
     # character being a space, so make your files and arts correctly.
     [ "$art" ] && {
@@ -88,7 +88,7 @@ find "$origin_arts" -type f | \
       }
 
       # Verify if the variable of rows are numbers
-      # TODO: make a beter way to fit both (I'm lazy now)
+      # TODO: make a better way to fit both (I'm lazy now)
       [ "$rows_art" -gt 0  ] || {
         
         # Echo error warning
@@ -115,14 +115,14 @@ find "$origin_arts" -type f | \
       }
 
       # Verify if the variable of columns are numbers
-      # TODO: make a beter way to fit both (I'm lazy now)
+      # TODO: make a better way to fit both (I'm lazy now)
       [ "$columns_art" -gt 0 ] || {
         echo "$g[FILENAME]:$R '$art_path'" \
           "uses wrong filename's format for columns!" \
           "Fixing it. Ignore the error above."
 
         # Get a new path based on the filesname, the dirname path and
-        # obviosuly sed will get only the first name of your file, nothing 
+        # obviously sed will get only the first name of your file, nothing 
         # after the spaces.
         art_path_new="$(dirname "$art_path")/$(printf "$art_path" | \
           sed -r 's*(.+/)|( .+)**g') $true_rows $true_columns"

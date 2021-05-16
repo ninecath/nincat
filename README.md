@@ -25,7 +25,7 @@
 ### Arch Linux (...based distros)
 
 With an AUR helper, you can install it with the package called `nincat-git`.
-E.j. with yay:
+Example with yay:
 
 ```zsh
 yay -S nincat-git
@@ -56,7 +56,7 @@ Probably you want to put when your Terminal opens, that is, when your shell is l
 Anyway, all you need to do is add this line in your shell **rc** changing the location for `nincat` folder, then you'll be able to load it when the terminal opens :)
 To verify what shell you use, run `echo $SHELL` in your terminal.
 
-+ For `zsh` the rc is put in `~/.zshrc`;
++ For `zsh` the	rc is put in `~/.zshrc`;
 + For `bash` the rc is put in `~/.bashrc`;
 + For `fish` the config is put in `~/.config/fish/config.fish`;
 + etc... search for the documentation of your shell if it isn't listed here.
@@ -92,7 +92,7 @@ Tree of arguments:
 
 ## 😪 Dependencies:
 + **lolcat** (optional)
-  - [Please, use its faster implentation](https://github.com/jaseg/lolcat)
+  - [Please, use its faster implantation](https://github.com/jaseg/lolcat)
   - So, if you want to, you can disable this dependency by just removing the `lolcat` folder in `ascii_arts` in the root. And if you know a little bit of shell scripting, remove its condition on the script file.
 
 ----
@@ -103,7 +103,7 @@ Tree of arguments:
 
 ## ✏️  Adding new ASCII arts:
 
-Filenames are made in this format: `<name-of-art> <rows-size-of-art> <columns-size-of-art>`. **Yes, it does contain spaces, do not forget it, it's important!** They are put in the `/ascii_arts/`. You can make a separate folder to add your own arts.
+File names are made in this format: `<name-of-art> <rows-size-of-art> <columns-size-of-art>`. **Yes, it does contain spaces, do not forget it, it's important!** They are put in the `/ascii_arts/`. You can make a separate folder to add your own arts.
 
 Please, do not fill all the lines with spaces to close all columns. A good and simple example should be:
 ```
@@ -122,7 +122,7 @@ And obviously, you should utilize `\033` instead of `\e`.
 
 ### 💞 Please, contribute!
 
-It would be lovely that for every art you add, you add it here, too! Remember to put your name in the first line, so your contribution is never forgetten :)
+It would be lovely that for every art you add, you add it here, too! Remember to put your name in the first line, so your contribution is never forgotten :)
 
 #### By Github's Issue
 
