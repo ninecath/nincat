@@ -37,7 +37,7 @@ yay -S nincat-git
 Click in `Code` in this repository and then `Download ZIP`. Extract it using your favourite tool and then in your terminal: 
 ```zsh
 cd PUT_HERE_THE_PATH_OF_NINCAT
-./make
+make
 nincat
 ```
 
@@ -47,7 +47,7 @@ From your terminal, you can clone in your preferred folder:
 ```zsh
 git clone 'https://github.com/BeyondMagic/nincat.git'
 cd nincat
-./make
+make
 nincat
 ```
 
