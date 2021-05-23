@@ -106,6 +106,10 @@ Tree of arguments:
 
 File names are made in this format: `<name-of-art> <rows-size-of-art> <columns-size-of-art>`. **Yes, it does contain spaces, do not forget it, it's important!** They are put in the `/ascii_arts/`. You can make a separate folder to add your own arts.
 
+Things to do while creating a new art:
++ Each line without trailing spaces at the end;
++ Use spaces (DO NOT USE TABS!!!);
+
 Please, do not fill all the lines with spaces to close all columns. A good and simple example should be:
 ```
 # Your wonderful username/name and/or extra information
