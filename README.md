@@ -38,7 +38,7 @@ Click in `Code` in this repository and then `Download ZIP`. Extract it using you
 ```zsh
 cd PUT_HERE_THE_PATH_OF_NINCAT
 make
-nincat
+nincat random
 ```
 
 ### By Git
@@ -48,7 +48,7 @@ From your terminal, you can clone in your preferred folder:
 git clone 'https://github.com/BeyondMagic/nincat.git'
 cd nincat
 make
-nincat
+nincat random
 ```
 
 ### Loading it
@@ -68,7 +68,7 @@ nincat random
 
 **TIP**: Faster is better, if you have the `dash` shell installed in your machine, consider using it (it's 4x faster than bash and considered the fastest shell) with the following line:
 ```zsh
-dash $(which nincat) random see
+which nincat
 dash LOCATION_OF_NINCAT/nincat/ random
 ```
 
