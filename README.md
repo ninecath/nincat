@@ -153,6 +153,13 @@ This is heavily inspired by [**shell-colors-scripts**](https://gitlab.com/dwt1/s
 
 So I created this for a faster and easier way to contribute with ASCII arts.
 
+THIS HOWEVER, nor **shell-colors-scripts**, is the first one made. You can find alternatives in the web, here are some:
+
++ [TerminalWelcome](https://github.com/devarshi16/TerminalWelcome)
++ [Art Splash Screen](https://github.com/DanCRichards/ASCII-Art-Splash-Screen)
++ [ASCII Art](https://github.com/Tianwei-Li/ascii_art)
++ [ShASCII](https://github.com/oskargicast/shascii)
+
 ---
 
 <p align="center">
