@@ -188,7 +188,7 @@ case "$1" in
       "   list [-l]              : print the secondpath of all ASCII arts\n" \
       "   view [-v]              : print an ASCII art based on the secondpath\n" \
       "			 [path_of_file/file] : secondpath of the art to print\n" \
-      "		help [-h]              : shows this\n"
+      "		help [-h]              : shows this\n" \
       "		update [-u]            : update the file list with all the arts."
 
     exit 0
