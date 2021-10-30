@@ -149,7 +149,7 @@ Send an email to `koetemagie@gmail.com` with your art, do not forget to put your
 
 ## ❗ Note:
 
-You can find alternatives in the web, here are some wit their initial commits:
+You can find alternatives in the web, here are some with their initial commits:
 
 + [ASCII Art](https://github.com/Tianwei-Li/ascii_art) (2013/02)
 + [ShASCII](https://github.com/oskargicast/shascii) (2014/05)
