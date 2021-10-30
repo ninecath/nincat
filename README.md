@@ -26,10 +26,11 @@
 ### Arch Linux (Manjaro, Artix, Arco...)
 
 With an AUR helper, you can install it with the package called `nincat-git`.
-Example with yay:
+Example with [paru](https://github.com/Morganamilo/paru):
 
 ```zsh
-yay -S nincat-git
+paru -S nincat-git
+nincat random
 ```
 
 ### By Github
@@ -69,7 +70,7 @@ nincat random
 **TIP**: Faster is better, if you have the `dash` shell installed in your machine, consider using it (it's 4x faster than bash and considered the fastest shell) with the following line:
 ```zsh
 which nincat
-dash LOCATION_OF_NINCAT/nincat/ random
+dash LOCATION_OF_NINCAT/nincat random
 ```
 
 In **Arch Linux (...based ditros)** you can use `pacman -S dash` to install it.
@@ -82,12 +83,13 @@ I'd recommend, too, you putting the line in the top of your shell.
 
 Tree of arguments:
 
-+ `random` or `r` : print a random ASCII arts that fits in your terminal;
-  - `see` or `s` : prints the path of the ASCII art that it finds.
-+ `list` or `l` : print the secondpath of all ASCII arts;
-+ `view` or `v` : view an ASCII art;
-  - `$2` : the secondpath of the ASCII art (use **list** in doubt).
-+ `help` or `h` : help list of commands;
++ `random` or `-r` : print a random ASCII arts that fits in your terminal;
+  - `see` or `-s` : prints the path of the ASCII art that it finds.
++ `list` or `-l` : print the secondpath of all ASCII arts;
++ `view` or `-v` : view an ASCII art;
+  - `[path_of_file/file]` : the secondpath of the ASCII art (use **list** in doubt).
++ `help` or `-h` : help list of commands;
++ `update` or `-u` : update the file list with all the arts.
 
 ----
 
