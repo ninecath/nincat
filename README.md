@@ -23,7 +23,7 @@
 
 ## ⚡ Installing
 
-### Arch Linux (...based distros)
+### Arch Linux (Manjaro, Artix, Arco...)
 
 With an AUR helper, you can install it with the package called `nincat-git`.
 Example with yay:
@@ -133,15 +133,15 @@ For **true colours**, [I'd recommend this](https://stackoverflow.com/questions/4
 
 It would be lovely that for every art you add, you add it here, too! Remember to put your name in the first line, so your contribution is never forgotten :)
 
+#### By Github's Pull Request (recommended)
+
+Clone this project, add your art in a file in either manually with **Github** or with **git**, then send a pull request here comparing both branches.
+
 #### By Github's Issue
 
 Create a new issue in the `New art` option and put there your art.
 
-#### By Github's Pull Request
-
-Clone this project, add your art in a file in either manually with **Github** or with **git**, then send a pull request here comparing both branches.
-
-#### Literally email
+#### Literally email (not recommended, please)
 
 Send an email to `koetemagie@gmail.com` with your art, do not forget to put your name in the first line and email. If you forgot, I will add it for you :)
 
@@ -149,16 +149,15 @@ Send an email to `koetemagie@gmail.com` with your art, do not forget to put your
 
 ## ❗ Note:
 
-This is heavily inspired by [**shell-colors-scripts**](https://gitlab.com/dwt1/shell-color-scripts/-/tree/master) (project made by DT. [His video about **shell-colors-scripts**](https://www.youtube.com/watch?v=8Z1OKN6TgxI).
+You can find alternatives in the web, here are some wit their initial commits:
 
-So I created this for a faster and easier way to contribute with ASCII arts.
-
-THIS HOWEVER, nor **shell-colors-scripts**, is the first one made. You can find alternatives in the web, here are some:
-
-+ [TerminalWelcome](https://github.com/devarshi16/TerminalWelcome)
-+ [Art Splash Screen](https://github.com/DanCRichards/ASCII-Art-Splash-Screen)
-+ [ASCII Art](https://github.com/Tianwei-Li/ascii_art)
-+ [ShASCII](https://github.com/oskargicast/shascii)
++ [ASCII Art](https://github.com/Tianwei-Li/ascii_art) (2013/02)
++ [ShASCII](https://github.com/oskargicast/shascii) (2014/05)
++ [Art Splash Screen](https://github.com/DanCRichards/ASCII-Art-Splash-Screen) (2017/11)
++ [shell-colors-scripts](https://gitlab.com/dwt1/shell-color-scripts/) (2018/02)
++ [TerminalWelcome](https://github.com/devarshi16/TerminalWelcome) (2019/03)
++ [nincat](https://github.com/BeyondMagic/nincat/) (2021/04)
++ [pokemon-colorscripts](https://gitlab.com/phoneybadger/pokemon-colorscripts/) (2021/08)
 
 ---
 
