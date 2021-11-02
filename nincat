@@ -48,7 +48,6 @@ ppp() {
   art="$(sed -e "s/^/$(printf %$(( \
     ($1 - $(printf "$selected" | grep -oE '[^ ]+$')) / 2 ))s)/" \
     -e '1d' "$selected")"
-  #art="$(sed -e '1d' "$selected")"
 
   # NOTE 2.2:
   # If it finds 'lolcat' on the path, then print with the 'lolcat' random
@@ -162,7 +161,7 @@ case "$1" in
       # If you want the full path, remove the sed call in the following 2 lines
       [ "$2" = 'see' ] || [ "$2" = '-s' ] && printf "$selected\n" | \
         sed "s*$path_script/ascii_arts/**" | \
-        awk '{print $(NF-2), $(NF-1), $NF}'
+        awk '{print/ $(NF-2), $(NF-1), $NF}'
 
       # NOTE 3.3.3.2:
       # Send columns of the terminal to `ppp` (print ASCII art function). see
