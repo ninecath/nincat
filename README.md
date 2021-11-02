@@ -8,6 +8,12 @@
 
 ---
 
+<p align="center">
+  <a href="http://asciiartist.com/wp/respect-ascii-artists-campaign/">
+    <img src="https://www.asciiart.eu/images/respectasciiartists.gif" alt"Respect ASCII Artists Campaign">
+  </a>
+</p>
+
 ## 🌟 Features:
 + Fast as it can be and lightweight;
 + Self adapt with the terminal size to print only ASCII arts that fit;
@@ -70,7 +76,7 @@ nincat random
 **TIP**: Faster is better, if you have the `dash` shell installed in your machine, consider using it (it's 4x faster than bash and considered the fastest shell) with the following line:
 ```zsh
 which nincat
-dash LOCATION_OF_NINCAT/nincat random
+dash LOCATION_OF_NINCAT random
 ```
 
 In **Arch Linux (...based ditros)** you can use `pacman -S dash` to install it.
@@ -96,7 +102,7 @@ Tree of arguments:
 ## 😪 Dependencies:
 + **lolcat** (optional)
   - [Please, use its faster implantation](https://github.com/jaseg/lolcat)
-  - So, if you want to, you can disable this dependency by just removing the `lolcat` folder in `ascii_arts` in the root. And if you know a little bit of shell scripting, remove its condition on the script file.
+  - So, if you want to, you can disable this dependency by just removing the `ascii_arts/lolcat` folder in the root directory of `nincat`. And if you know a little bit of shell scripting, remove its condition on the script file.
 
 ----
 
