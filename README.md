@@ -55,7 +55,7 @@ nincat random
 ### Loading it
 
 Probably you want to put when your Terminal opens, that is, when your shell is loaded. If you don't care a lot about shells, you probably use `bash`, maybe `zsh` with `Oh my zsh`.
-Anyway, all you need to do is add this line in your shell **rc** changing the location for `nincat` folder, then you'll be able to load it when the terminal opens :)
+Anyway, all you need to do is add this line in your shell **rc** changing the location for `nincat` script, then you'll be able to load it when the terminal opens :)
 To verify what shell you use, run `echo $SHELL` in your terminal.
 
 + For `zsh` the	rc is put in `~/.zshrc`;
