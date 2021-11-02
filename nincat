@@ -82,12 +82,12 @@ case "$1" in
     # that we add a `.ignorearts` file to keep updating without overriding the
     # art that we changed or updated. Verify if the file exists and then put
     # it path if it does.
-    cat "$HOME/.cache/nincat_list" || {
+    cat "$HOME/.cache/nincat_list" 2>/dev/null || {
 
-      echo "nincat: The file list was not found on the root directory.\n" \
-           "nincat will try to create it by itself. If it doesn't work, try" \
+      echo "nincat: The file list was not found on the root directory. nincat" \
+           "will try to create it by itself. If it doesn't work, try" \
            "running 'nincat update'."
-      exec "$path_script/nincat" 'update'
+      "$path_script/nincat" 'update' && exec "$path_script/nincat" 'list'
       
     }
 
@@ -142,8 +142,8 @@ case "$1" in
 
     } || {
 
-      echo "nincat: The file list was not found on the root directory.\n" \
-           "nincat will try to create it by itself. If it doesn't work, try" \
+      echo "nincat: The file list was not found on the root directory. nincat" \
+           "will try to create it by itself. If it doesn't work, try" \
            "running 'nincat update'."
       "$path_script/nincat" 'update' && exec "$path_script/nincat" 'random'
       
@@ -201,7 +201,7 @@ case "$1" in
     find "$path_script/ascii_arts" -type f -size +0 | \
       sed "s*$path_script/ascii_arts/**" | \
       awk '{print $(NF-2), $(NF-1), $NF}' > "$HOME/.cache/nincat_list" \
-    && echo "nincat: Updated file with list of arts" \
+    && echo "nincat: Updated file with list of arts." \
     || echo "nincat: Failed to update file with list of arts, please share" \
             "the log of the 'find' command (if there's any) on a new issue.\n"
 
