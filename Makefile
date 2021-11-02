@@ -9,6 +9,7 @@ all: install
 install:
 	mkdir -p ${DESTDIR}/bin
 	cp -f nincat ${DESTDIR}/bin/nincat
+	rm -rf ${DESTDIR}/bin/ascii_arts
 	cp -rf ascii_arts/ ${DESTDIR}/bin/ascii_arts
 
 uninstall:
