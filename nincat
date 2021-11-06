@@ -43,8 +43,8 @@ ppp() {
   # 2. An operation will find the number to add characters to a line and
   #    center it.
   # 3. 'printf' will print the spaces to center the string with loop.
-  # 4. 'sed' will append as prefix to all lines of the file and delete the 1st
-  #     line that is supposed to be your name/username, etc.
+  # 4. 'grep' will append as prefix to all lines of the file and delete the 1st
+  #     line that is supposed to be the name/username of the artist, etc.
   art="$(sed -e "s/^/$(printf %$(( \
     ($1 - $(printf "$selected" | grep -oE '[^ ]+$')) / 2 ))s)/" \
     -e '1d' "$selected")"
