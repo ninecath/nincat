@@ -24,6 +24,7 @@
 + List all ASCII art's paths (by option);
 + Print the name of printed art (by option);
 + We'll always give you more, baby!
++ Use static list of ASCCI arts with the paths to be faster (by option you can update).
 
 ---
 
