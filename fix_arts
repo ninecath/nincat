@@ -50,7 +50,7 @@ find "$origin_arts" -type f | \
       # Verify if there's a first comment and move it to the wrong_arts 
       # folder if there isn't. Quite simple, right?!
       [ $(echo "$art" | head -n1 | grep -cE '^#.+' ) = 0 ] && {
-  
+
         separate_folder="$origin_arts../wrong_arts"
         echo "$r[CREDITS]:$R file '$art_path' doesn't have credits!" \
           "Moving it to $separate_folder"
@@ -77,20 +77,20 @@ find "$origin_arts" -type f | \
 
       # If there are trailing spaces in the ASCII art, remove it
       # [ $(echo "$art" | grep -cE ' +$') = 0 ] || {
-  
+
       #  echo "$g[COLUMN(s)]:$R '$art_path'" \
       #    "line(s) have more characters than '$true_columns'. Fixing."
       #  sed -ri 's/ +$//' "$art_path"
       #  art="$(sed -re 's/\\033\[[[:digit:]]{1,}m//g' "$art_path" -e '1d')"
       #  true_columns=$(echo -E "$art" | awk '{ print length }' | \
       #    sort -n | tail -1)
-  
+
       # }
 
       # Verify if the variable of rows are numbers
       # TODO: make a better way to fit both (I'm lazy now)
       [ "$rows_art" -gt 0  ] || {
-        
+
         # Echo error warning
         echo "$g[FILENAME]:$R '$art_path'" \
           "uses wrong filename's format for rows!" \

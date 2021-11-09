@@ -173,4 +173,3 @@ You can find alternatives in the web, here are some with their initial commits:
 <p align="center">
   <a href="/LICENSE"><b>GPL3 License</b></a>
 </p>
-
