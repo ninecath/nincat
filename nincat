@@ -18,12 +18,12 @@
 # NOTE:
 #   Keep the current syntax for developing!
 #
-# MAINTAINER(s):
+# MAINTAINER: (s)
 #   BeyondMagic : 2021- : koetemagie@gmail.com
 #
 # GPL3 © 2021 : github.com/BeyondMagic/nincat
 
-# NOTE 1:
+# NOTE : 1
 # Path of this script, it will use a fast and simple way to go to the path and
 # get from there using 'pwd -P'. If you want to set an absolute path, I'd 
 # recommend you to put in somewhere that you can update to get new arts!
@@ -31,12 +31,12 @@
 # will override.
 path_script="$(cd -- "$(dirname "$0")" >/dev/null 2>&1 && pwd -P)"
 
-# NOTE 2:
+# NOTE : 2
 # Print the art in the terminal. It accepts only one argument which will help
 # to center the terminal.
 ppp() {
 
-  # NOTE 2.1:
+  # NOTE : 2.1
   # This will print the art to a variable.
   # Important execution order:
   # 1. 'printf' will get columns of the filename with grep (faster than awk).
@@ -49,7 +49,7 @@ ppp() {
     ($1 - $(printf "$selected" | grep -oE '[^ ]+$')) / 2 ))s)/" \
     -e '1d' "$selected")"
 
-  # NOTE 2.2:
+  # NOTE : 2.2
   # If it finds 'lolcat' on the path, then print with the 'lolcat' random
   # If not, then it will printf normally with a reset colour and background
   # after the art.
@@ -63,19 +63,19 @@ ppp() {
 
 }
 
-# NOTE 3:
+# NOTE : 3
 # This maybe the most effective way to accept options, so I highly doubt there
 # will be any changes here. As you can see, the first argument decides how the
 # entire script will be loaded. You can call to load only the art with
 # `/nincat random` or `/nincat r`.
 case "$1" in
 
-  # NOTE 3.1:
+  # NOTE : 3.1
   # This option will show the secondpath of all ASCII arts files that nincat can
   # find.
   list | '-l')
 
-    # NOTE 3.1.1:
+    # NOTE : 3.1.1
     # Print all the arts files that it finds with the `find` command, it will
     # print the name after the root directory. This may be useful to the day
     # that we add a `.ignorearts` file to keep updating without overriding the
@@ -94,11 +94,11 @@ case "$1" in
 
   ;;
 
-  # NOTE 3.2:
+  # NOTE : 3.2
   # This will show an ASCII art based on the secondpath that is given.
   view | '-v')
   
-    # NOTE 3.2.1:
+    # NOTE : 3.2.1
     # If there's an argument (which is the filename secondpath), then choose it 
     # instead of a random. Remember that the secondpath counts from the root of 
     # the foler `ascii_arts`, so if, for example, there's an art called
@@ -109,23 +109,23 @@ case "$1" in
            "then run nincat again with the following argument 'list'."; exit 1
     }
 
-    # NOTE 3.2.2:
+    # NOTE : 3.2.2
     # Send columns of the terminal to `ppp` (print ASCII art function). See
     # note 2 about it.
     ppp $(tput cols)
 
   ;;
 
-  # NOTE 3.3
+  # NOTE : 3.3
   # This will probably the option that will be often used, this prints an ASCII
   # art randomly that fits in your terminal.
   random | '-r')
 
-    # NOTE 3.3.1
+    # NOTE : 3.3.1
     # Pass columns of terminal to variable to be used twice here.
     columns=$(tput cols)
 
-    # NOTE 3.3.2:
+    # NOTE : 3.3.2
     # Select a random art that fits in the terminal size.
     # 1. 'find' will get all ASCII art paths in this directory that are not
     #    empty.
@@ -139,7 +139,7 @@ case "$1" in
         "(\$(NF-1) < $(($(tput lines) - 1))) && (\$NF < $(($columns - 2)))" \
         "$HOME/.cache/nincat_list" | shuf | head -n1)"
 
-      # NOTE 3.3.2.1
+      # NOTE : 3.3.2.1
       # This is only for a very small percentage of selected arts, which can
       # happen when the terminal is so small, but so small that even nincat
       # will simply ignore all arts on the path.
@@ -156,14 +156,14 @@ case "$1" in
       
     }
 
-    # NOTE 3.3.3:
+    # NOTE : 3.3.3
     # This block of code will only execute if an ASCII art is found, note that
     # it you can added a command to exit with an error, like it didn't find
     # something with '|| exit 1' at the end of the block or after this
     # condition in the next line.
     [ "$selected" ] && {
 
-      # NOTE 3.3.3.1:
+      # NOTE : 3.3.3.1
       # Print the name of the file, you can add $NF to print certain fields, if
       # you just want the name, remove the $(NF-2), $(NF-1) for that.
       # If you want the full path, remove the sed call in the following 2 lines
@@ -171,7 +171,7 @@ case "$1" in
         sed "s*$path_script/ascii_arts/**" | \
         awk '{print/ $(NF-2), $(NF-1), $NF}'
 
-      # NOTE 3.3.3.2:
+      # NOTE : 3.3.3.2
       # Send columns of the terminal to `ppp` (print ASCII art function). see
       # note 2 and 3.3.1 about it.
       ppp $columns
@@ -183,7 +183,7 @@ case "$1" in
     
   ;;
 
-  # NOTE 3.4:
+  # NOTE : 3.4
   # Help command, show a list with what can be run by nincat and version.
   help | '-h')
 
@@ -201,7 +201,7 @@ case "$1" in
 
   ;;
   
-  # NOTE 3.5:
+  # NOTE : 3.5
   # Update command, it will update the list file with all the new art files.
   update | '-u')
   
@@ -218,7 +218,7 @@ case "$1" in
 
 esac
 
-# NOTE 4:
+# NOTE : 4
 # If nincat is not called with any argument, then just gives a warning. This
 # only happens when nincat does not exit before.
 echo "nincat: you need to call me with something! Try '/nincat help'."; exit 1
