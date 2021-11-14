@@ -156,14 +156,14 @@ Send an email to `koetemagie@gmail.com` with your art, do not forget to put your
 
 ---
 
-## ❗ Note:
+## ❗ Acknowledgements:
 
 You can find alternatives in the web, here are some with their initial commits:
 
 + [ASCII Art](https://github.com/Tianwei-Li/ascii_art) (2013/02)
 + [ShASCII](https://github.com/oskargicast/shascii) (2014/05)
 + [Art Splash Screen](https://github.com/DanCRichards/ASCII-Art-Splash-Screen) (2017/11)
-+ [shell-colors-scripts](https://gitlab.com/dwt1/shell-color-scripts/) (2018/02)
++ Inspired by [shell-colors-scripts](https://gitlab.com/dwt1/shell-color-scripts/) (2018/02)
 + [TerminalWelcome](https://github.com/devarshi16/TerminalWelcome) (2019/03)
 + [nincat](https://github.com/BeyondMagic/nincat/) (2021/04)
 + [pokemon-colorscripts](https://gitlab.com/phoneybadger/pokemon-colorscripts/) (2021/08)
