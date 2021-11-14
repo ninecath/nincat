@@ -143,9 +143,9 @@ case "$1" in
       # This is only for a very small percentage of selected arts, which can
       # happen when the terminal is so small, but so small that even nincat
       # will simply ignore all arts on the path.
-      # 1. `exec` is for the shell think that the exit didn't have any errors.
+      # 1. `:` is for the shell think that the exit didn't have any errors.
       [ "$path_script/ascii_arts/" = "$selected" ] && unset selected
-      exec
+      :
 
     } || {
 
