@@ -104,11 +104,12 @@ case "$1" in
     [ -f "$2" ] || {
       echo "nincat: specify the path of your art, if you don't know" \
            "then run 'nincat --list'."; exit 1
-    }
+    } && selected="$2"
 
     # NOTE : 3.2.2
     # Send columns of the terminal to `ppp` (print ASCII art function). See
     # note 2 about it.
+    
     ppp $(tput cols)
 
   ;;
