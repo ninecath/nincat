@@ -11,7 +11,9 @@
 <p align="center">
   <a href="http://asciiartist.com/wp/respect-ascii-artists-campaign/">
     <img src="https://www.asciiart.eu/images/respectasciiartists.gif" alt"Respect ASCII Artists Campaign">
-    <img src="/.github/logo.png" alt"ninecath">
+  </a>
+  <a href="https://github.com/ninecath/">
+    <img src="/.github/logo.png" width="156" alt"ninecath">
   </a>
 </p>
 
