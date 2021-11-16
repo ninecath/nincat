@@ -27,7 +27,11 @@
 + List all ASCII art's paths (by option);
 + Print the name of printed art (by option);
 + We'll always give you more, baby!
-+ Use static list of ASCCI arts with the paths to be faster (by option you can update).
++ Use modular list of ASCCI arts with the paths to be faster (by option you can update).
++ Modular folder containing the ASCII arts.
++ Environment variables:
++ + `NINCAT_ARTS_FOLDER`: Folder of the ASCII arts, current is /ascii_arts
++ + `NINCAT_ARTS_LIST` : File that contains ASCII art paths, current: $HOME/.cache/nincat_list
 
 ---
 
@@ -93,13 +97,13 @@ I'd recommend, too, you putting the line in the top of your shell.
 
 Tree of arguments:
 
-+ `random` or `-r` : print a random ASCII arts that fits in your terminal;
-  - `see` or `-s` : prints the path of the ASCII art that it finds.
-+ `list` or `-l` : print the secondpath of all ASCII arts;
-+ `view` or `-v` : view an ASCII art;
-  - `[path_of_file/file]` : the secondpath of the ASCII art (use **list** in doubt).
-+ `help` or `-h` : help list of commands;
-+ `update` or `-u` : update the file list with all the arts.
++ `--random` or `-r` : print a random ASCII arts that fits in your terminal;
+  - `--see` or `-s` : prints the path of the ASCII art that it finds.
++ `--list` or `-l` : print the path of all ASCII arts;
++ `--view` or `-v` : view an ASCII art;
+  - `[path_of_file]` : the path of the ASCII art (use **list** in doubt).
++ `--help` or `-h` : help list of commands;
++ `--update` or `-u` : update the file list with all the arts.
 
 ----
 
