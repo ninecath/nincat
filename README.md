@@ -60,7 +60,7 @@ nincat random
 
 From your terminal, you can clone in your preferred folder:
 ```zsh
-git clone 'https://github.com/BeyondMagic/nincat.git'
+git clone 'https://github.com/ninecath/nincat'
 cd nincat
 make
 nincat random
