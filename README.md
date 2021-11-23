@@ -118,9 +118,11 @@ Tree of arguments:
   <img align="center" src="/.github/new_art.png" alt="Preview of one ASCII art with lolcat."/>
 </p>
 
-## ✏️  Adding new ASCII arts:
+## ✏️  Adding/creating new ASCII arts:
 
 File names are made in this format: `<name-of-art> <rows-size-of-art> <columns-size-of-art>`. **Yes, it does contain spaces, do not forget it, it's important!** They are put in the `/ascii_arts/`. You can make a separate folder to add your own arts.
+
+\* If the art was made by another artist, please -- please -- add her/his name to the first line tagging him/her as the original artist, the maintainer (s) cannot verify each art being added and definitely that would show a little bit of kindness that can make a difference in this big universe. Thank you.
 
 Things to do while creating a new art:
 + Each line without trailing spaces at the end;
