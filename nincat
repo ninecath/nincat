@@ -31,7 +31,7 @@ path_script="$(cd -- "$(dirname "$0")" >/dev/null 2>&1 && pwd -P)"
 # NOTE : 2
 # Print the art in the terminal. It accepts only one argument which will help
 # to center the terminal.
-ppp() {
+print_file() {
 
   # NOTE : 2.1
   # This will print the art to a variable.
@@ -115,10 +115,10 @@ case "$1" in
     } && selected="$2"
 
     # NOTE : 4.2.2
-    # Send columns of the terminal to `ppp` (print ASCII art function). See
+    # Send columns of the terminal to `print_file` (print ASCII art function). See
     # note 2 about it.
     
-    ppp $(tput cols)
+    print_file $(tput cols)
 
   ;;
 
@@ -172,9 +172,9 @@ case "$1" in
       [ "$2" = '--see' ] || [ "$2" = '-s' ] && printf "$selected\n" | head -n1
 
       # NOTE : 4.3.3.2
-      # Send columns of the terminal to `ppp` (print ASCII art function). see
+      # Send columns of the terminal to `print_file` (print ASCII art function). see
       # note 2 and 3.3.1 about it.
-      ppp $columns
+      print_file $columns
 
     }
 
