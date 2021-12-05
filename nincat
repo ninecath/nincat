@@ -53,7 +53,7 @@ print_file() {
   # Change the 'lolcat' options if you want something different as some
   # lolcat(s) have less/more options.
   [ $(printf "$selected" | grep -c 'lolcat') = 0 ] \
-		&& echo "$art\033[0m" \
+		&& echo "$art\033[1m" \ #  to avoid escaping at the end character
 		|| echo "$art" | lolcat -r -b -v 0.02 -h 0.02
 
   exit 0
