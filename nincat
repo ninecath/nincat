@@ -169,7 +169,7 @@ case "$1" in
       # Print the name of the file, you can add $NF to print certain fields, if
       # you just want the name, remove the $(NF-2), $(NF-1) for that.
       # If you want the full path, remove the sed call in the following 2 lines
-      [ "$2" = '--see' ] || [ "$2" = '-s' ] && printf "$selected\n" | head -n1
+      [ "$2" = '--raw' ] || [ "$2" = '-r' ] && printf "$selected\n" | head -n1
 
       # NOTE : 4.3.3.2
       # Send columns of the terminal to `print_file` (print ASCII art function). see
@@ -190,7 +190,7 @@ case "$1" in
     echo \
       "\033[1mnincat help with arguments in a tree list\033[0m\n" \
       "   --random [-r]            : show a random ASCII art\n" \
-			"			 --see [-s]            : (optional) show the secondpath of the art\n" \
+			"			 --raw [-r]            : (optional) show the secondpath of the art\n" \
       "   --list [-l]              : print the secondpath of all ASCII arts\n" \
       "   --view [-v]              : print an ASCII art based on the secondpath\n" \
       "			 [path_of_file]        : secondpath of the art to print\n" \
