@@ -29,8 +29,7 @@
 path_script="$(cd -- "$(dirname "$0")" >/dev/null 2>&1 && pwd -P)"
 
 # NOTE : 2
-# Print the art in the terminal. It accepts only one argument which will help
-# to center the terminal.
+# Print the art in the terminal. It accepts two arguments which will define how we handle the output.
 print_file() {
 
   # NOTE : 2.1
@@ -41,10 +40,13 @@ print_file() {
   #    center it.
   # 3. 'printf' will print the spaces to center the string with loop.
   # 4. 'grep' will append as prefix to all lines of the file and delete the 1st
-  #     line that is supposed to be the name/username of the artist, etc.
-  art="$(sed -e "s/^/$(printf %$(( \
-    ($1 - $(printf "$selected" | grep -oE '[^ ]+$')) / 2 ))s)/" \
-    -e '1d' "$selected")"
+  #     line if '--raw' or '-r' is the second argument, etc.
+  [ "$2" = '--raw' ] || [ "$2" = '-r' ] \
+    && art="$(sed -e "s/^/$(printf %$(( \
+      ($1 - $(printf "$selected" | grep -oE '[^ ]+$')) / 2 ))s)/" "$selected")" \
+    || art="$(sed -e "s/^/$(printf %$(( \
+      ($1 - $(printf "$selected" | grep -oE '[^ ]+$')) / 2 ))s)/" \
+      -e '1d' "$selected")"
 
   # NOTE : 2.2
   # If it finds 'lolcat' on the path, then print with the 'lolcat' random
@@ -52,8 +54,9 @@ print_file() {
   # after the art.
   # Change the 'lolcat' options if you want something different as some
   # lolcat(s) have less/more options.
+  #  to avoid escaping at the end character
   [ $(printf "$selected" | grep -c 'lolcat') = 0 ] \
-		&& echo "$art\033[1m" \ #  to avoid escaping at the end character
+		&& echo "$art\033[1m" \
 		|| echo "$art" | lolcat -r -b -v 0.02 -h 0.02
 
   exit 0
@@ -117,8 +120,7 @@ case "$1" in
     # NOTE : 4.2.2
     # Send columns of the terminal to `print_file` (print ASCII art function). See
     # note 2 about it.
-    
-    print_file $(tput cols)
+    print_file $(tput cols) "$3"
 
   ;;
 
@@ -163,20 +165,8 @@ case "$1" in
     # it you can added a command to exit with an error, like it didn't find
     # something with '|| exit 1' at the end of the block or after this
     # condition in the next line.
-    [ "$selected" ] && {
-
-      # NOTE : 4.3.3.1
-      # Print the name of the file, you can add $NF to print certain fields, if
-      # you just want the name, remove the $(NF-2), $(NF-1) for that.
-      # If you want the full path, remove the sed call in the following 2 lines
-      [ "$2" = '--raw' ] || [ "$2" = '-r' ] && printf "$selected\n" | head -n1
-
-      # NOTE : 4.3.3.2
-      # Send columns of the terminal to `print_file` (print ASCII art function). see
-      # note 2 and 3.3.1 about it.
-      print_file $columns
-
-    }
+    # Send columns of the terminal to `print_file` (print ASCII art function). see
+    [ "$selected" ] && print_file $columns "$2"
 
     # echo "nincat: did not find any ASCII art that fits :("
     exit 1
@@ -194,6 +184,7 @@ case "$1" in
       "   --list [-l]              : print the secondpath of all ASCII arts\n" \
       "   --view [-v]              : print an ASCII art based on the secondpath\n" \
       "			 [path_of_file]        : secondpath of the art to print\n" \
+      "         --raw [-r]         : (optional) show the secondpath of the art\n" \
       "		--help [-h]              : shows this\n" \
       "		--update [-u]            : update the file list with all the arts."
 
