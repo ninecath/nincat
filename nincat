@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 #
 # VERSION:
-#   4.0
+#   5.0
 #
 # DESCRIPTION:
 #   This a simple script that loads an ASCII art centred in your terminal.
