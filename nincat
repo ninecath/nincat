@@ -32,6 +32,24 @@ path_script="$(cd -- "$(dirname "$0")" >/dev/null 2>&1 && pwd -P)"
 # Print the art in the terminal. It accepts two arguments which will define how we handle the output.
 print_file() {
 
+  [ "$2" = '--center' ] || [ "$2" = '-c' ] || \
+  [ "$3" = '--center' ] || [ "$3" = '-c' ] && {
+
+    art="$(sed -e "s/^/$(printf %$(( \
+      ($1 - $(printf "$selected" | grep -oE '[^ ]+$')) / 2 ))s)/" -e '1 s/^ *//' "$selected")"
+
+  }; [ "$2" = '--right' ] || [ "$2" = '-r' ] || \
+     [ "$3" = '--right' ] || [ "$3" = '-r' ] && {
+
+    art="$(sed -e "s/^/$(printf %$(( \
+      ($1 - $(printf "$selected" | grep -oE '[^ ]+$'))))s)/" -e '1 s/^ *//' "$selected")"
+
+  }; [ "$art" = '' ] || [ "$2" = '' ] && {
+
+    art="$(cat "$selected")"
+
+  }
+
   # NOTE : 2.1
   # This will print the art to a variable.
   # Important execution order:
@@ -41,12 +59,8 @@ print_file() {
   # 3. 'printf' will print the spaces to center the string with loop.
   # 4. 'grep' will append as prefix to all lines of the file and delete the 1st
   #     line if '--raw' or '-r' is the second argument, etc.
-  [ "$2" = '--raw' ] || [ "$2" = '-r' ] \
-    && art="$(sed -e "s/^/$(printf %$(( \
-      ($1 - $(printf "$selected" | grep -oE '[^ ]+$')) / 2 ))s)/" "$selected")" \
-    || art="$(sed -e "s/^/$(printf %$(( \
-      ($1 - $(printf "$selected" | grep -oE '[^ ]+$')) / 2 ))s)/" \
-      -e '1d' "$selected")"
+  [ "$2" = '--raw' ] || [ "$2" = '-R' ] || \
+  [ "$3" = '--raw' ] || [ "$3" = '-R' ] || art="$(echo "$art" | sed 1d)"
 
   # NOTE : 2.2
   # If it finds 'lolcat' on the path, then print with the 'lolcat' random
@@ -120,7 +134,7 @@ case "$1" in
     # NOTE : 4.2.2
     # Send columns of the terminal to `print_file` (print ASCII art function). See
     # note 2 about it.
-    print_file $(tput cols) "$3"
+    print_file $(tput cols) "$3" "$4"
 
   ;;
 
@@ -166,7 +180,18 @@ case "$1" in
     # something with '|| exit 1' at the end of the block or after this
     # condition in the next line.
     # Send columns of the terminal to `print_file` (print ASCII art function). see
-    [ "$selected" ] && print_file $columns "$2"
+    [ "$selected" ] && {
+
+      # NOTE : 4.3.3.1
+      # Print the name of the file, you can add $NF to print certain fields, if
+      # you just want the name, remove the $(NF-2), $(NF-1) for that.
+      # If you want the full path, remove the sed call in the following 2 lines
+      [ "$2" = '--raw' ] || [ "$2" = '-r' ] || \
+      [ "$3" = '--raw' ] || [ "$3" = '-r' ] && printf "$selected\n" | head -n1
+      
+      print_file $columns "$2" "$3"
+
+    }
 
     # echo "nincat: did not find any ASCII art that fits :("
     exit 1
@@ -180,11 +205,15 @@ case "$1" in
     echo \
       "\033[1mnincat help with arguments in a tree list\033[0m\n" \
       "   --random [-r]            : show a random ASCII art\n" \
-			"			 --raw [-r]            : (optional) show the secondpath of the art\n" \
+			"			 --raw [-R]            : (optional) show the path of the art and description\n" \
+			"			 --center [-c]         : (optional) center the art\n" \
+			"			 --right [-r]          : (optional) put to the right the art\n" \
       "   --list [-l]              : print the secondpath of all ASCII arts\n" \
       "   --view [-v]              : print an ASCII art based on the secondpath\n" \
       "			 [path_of_file]        : secondpath of the art to print\n" \
-      "         --raw [-r]         : (optional) show the secondpath of the art\n" \
+      "         --raw [-R]         : (optional) show the secondpath of the art\n" \
+			"			    --center [-c]      : (optional) center the art\n" \
+			"			    --right [-r]       : (optional) put to the right the art\n" \
       "		--help [-h]              : shows this\n" \
       "		--update [-u]            : update the file list with all the arts."
 
