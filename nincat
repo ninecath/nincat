@@ -32,37 +32,44 @@ path_script="$(cd -- "$(dirname "$0")" >/dev/null 2>&1 && pwd -P)"
 # Print the art in the terminal. It accepts two arguments which will define how we handle the output.
 print_file() {
 
+   # NOTE : 2.1
+  # This will print the art to a variable.
+  # Important execution order:
+  # 1. 'printf' will get columns of the filename with grep (faster than awk).
+  # 2. An operation will find the number to add characters to a line and
+  #    center it.
+  # 3. 'printf' will print the spaces to center the string with built-in loop.
+  # 4. 'grep' will append as prefix to all lines of the file. 
   [ "$2" = '--center' ] || [ "$2" = '-c' ] || \
   [ "$3" = '--center' ] || [ "$3" = '-c' ] && {
 
     art="$(sed -e "s/^/$(printf %$(( \
       ($1 - $(printf "$selected" | grep -oE '[^ ]+$')) / 2 ))s)/" -e '1 s/^ *//' "$selected")"
 
+   # NOTE : 2.2
+  # This will print the art to a variable.
+  # Important execution order:
+  # 1. 'printf' will get columns of the filename with grep (faster than awk).
+  # 2. An operation will find the number to add characters to a line and
+  #    make it to the right.
+  # 3. 'printf' will print the spaces to left the string with built-in loop.
+  # 4. 'grep' will append as prefix to all lines of the file. 
   }; [ "$2" = '--right' ] || [ "$2" = '-r' ] || \
      [ "$3" = '--right' ] || [ "$3" = '-r' ] && {
 
     art="$(sed -e "s/^/$(printf %$(( \
       ($1 - $(printf "$selected" | grep -oE '[^ ]+$'))))s)/" -e '1 s/^ *//' "$selected")"
 
-  }; [ "$art" = '' ] || [ "$2" = '' ] && {
+   # NOTE : 2.3
+  # Just print the art as it is.
+  }; [ "$art" = '' ] || [ "$2" = '' ] && art="$(cat "$selected")"
 
-    art="$(cat "$selected")"
-
-  }
-
-  # NOTE : 2.1
-  # This will print the art to a variable.
-  # Important execution order:
-  # 1. 'printf' will get columns of the filename with grep (faster than awk).
-  # 2. An operation will find the number to add characters to a line and
-  #    center it.
-  # 3. 'printf' will print the spaces to center the string with loop.
-  # 4. 'grep' will append as prefix to all lines of the file and delete the 1st
-  #     line if '--raw' or '-r' is the second argument, etc.
+  # NOTE : 2.4
+  # If raw mode is active, then do not remove the first line.
   [ "$2" = '--raw' ] || [ "$2" = '-R' ] || \
   [ "$3" = '--raw' ] || [ "$3" = '-R' ] || art="$(echo "$art" | sed 1d)"
 
-  # NOTE : 2.2
+  # NOTE : 2.5
   # If it finds 'lolcat' on the path, then print with the 'lolcat' random
   # If not, then it will printf normally with a reset colour and background
   # after the art.
