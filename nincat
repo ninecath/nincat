@@ -30,7 +30,7 @@ path_script="$(cd -- "$(dirname "$0")" >/dev/null 2>&1 && pwd -P)"
 
 # NOTE : 2
 # Print the art in the terminal. It accepts two arguments which will define how we handle the output.
-print_file() {
+print_file () {
 
    # NOTE : 2.1
   # This will print the art to a variable.
@@ -75,10 +75,15 @@ print_file() {
   # after the art.
   # Change the 'lolcat' options if you want something different as some
   # lolcat(s) have less/more options.
-  #  to avoid escaping at the end character
-  [ $(printf "$selected" | grep -c '_lolcat') = 0 ] \
-		&& echo "$art\033[1m" \
-		|| echo "$art" | lolcat -r -b -v 0.02 -h 0.02
+  #  to avoid escaping at the end characters
+  # "external_command" serves as a fallback in case it finds a folder with the following
+  # syntax: 
+  #   "   _   folder_name"
+  # because "folder_name" will be used as the command to call.
+  external_command="$(printf "$selected" | grep -oP '((?<=/   _   )\w+)')"
+  [ $external_command ] \
+    && echo "$art" | $external_command \
+    || echo "$art\033[1m"
 
   exit 0
 
