@@ -76,7 +76,7 @@ print_file() {
   # Change the 'lolcat' options if you want something different as some
   # lolcat(s) have less/more options.
   #  to avoid escaping at the end character
-  [ $(printf "$selected" | grep -c 'lolcat') = 0 ] \
+  [ $(printf "$selected" | grep -c '_lolcat') = 0 ] \
 		&& echo "$art\033[1m" \
 		|| echo "$art" | lolcat -r -b -v 0.02 -h 0.02
 
