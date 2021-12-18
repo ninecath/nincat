@@ -238,7 +238,10 @@ case "$1" in
     # that we add a `.ignorearts` file to keep updating without overriding the
     # art that we changed or updated. Verify if the file exists and then put
     # it path if it does.
-    find "$arts_folder" -type f -size +0 > "$nincat_list" \
+    # The grep command will remove the lines from the output that contain on
+    # the "ignore_nincat" file.
+    find "$arts_folder" -type f -size +0 | \
+      grep -Fvxf "$path_script"/ignore_nincat > "$nincat_list" \
     && echo "nincat: Updated file with list of arts." \
     || echo "nincat: Failed to update file with list of arts, please share" \
             "the log of the 'find' command (if there's any) on a new issue.\n"
