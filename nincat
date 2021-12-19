@@ -91,15 +91,10 @@ print_file () {
 
 # NOTE: 3
 # Environment variables that nincat accepts.
-# NINCAT_ARTS_FOLDER : Folder of the ASCII arts, current is /ascii_arts
-# NINCAT_ARTS_LIST   : File that contains ASCII art paths, current: 
-#                      $HOME/.cache/nincat_list
-[ "$NINCAT_ARTS_FOLDER" ] \
-  && arts_folder="$NINCAT_ARTS_FOLDER" \
-  || arts_folder="$path_script/ascii_arts"
-[ "$NINCAT_ARTS_LIST" ] \
-  && nincat_list="$NINCAT_ARTS_LIST" \
-  || nincat_list="$HOME/.cache/nincat_list"
+# NINCAT_ROOT : Root of nincat information.
+[ "$NINCAT_ROOT" ] \
+  && root="$NINCAT_ROOT" \
+  || root="$HOME"/.cache/nincat
 
 # NOTE : 4
 # This maybe the most effective way to accept options, so I highly doubt there
@@ -115,13 +110,11 @@ case "$1" in
 
     # NOTE : 4.1.1
     # Print all the art files of the list file.
-    cat "$nincat_list" 2>/dev/null || {
+    cat "$root"/nincat_list 2>/dev/null || {
 
-      echo "nincat: The file list was not found on the root directory. nincat" \
-           "will try to create it by itself. If it doesn't work, try" \
-           "running 'nincat update'."
-      "$path_script/nincat" '--update' && exec "$path_script/nincat" '--list'
-      
+      echo "nincat: The file list was not found on the root directory. Try" \
+           "running 'nincat --update'."
+
     }
 
     exit 0
@@ -133,11 +126,7 @@ case "$1" in
   '--view' | '-v')
   
     # NOTE : 4.2.1
-    # If there's an argument (which is the filename secondpath), then choose it 
-    # instead of a random. Remember that the secondpath counts from the root of 
-    # the folder `arts_folder`, so if, for example, there's an art called
-    # `bird 4 7`in the `arts_folder/lolcat/`, the correct way to call it should
-    # be `nincat "lolcat/bird 4 7"`.
+    # If there's an file (which is the argument), then see if it exists.
     [ -f "$2" ] || {
       echo "nincat: specify the path of your art, if you don't know" \
            "then run 'nincat --list'."; exit 1
@@ -165,11 +154,11 @@ case "$1" in
     #    the name;
     # 2. 'shuf' will randomize the list
     # 3. 'head' will get the first file of the list.
-    [ -f "$nincat_list" ] && {
+    [ -f "$root"/nincat_list ] && {
       
       selected="$(awk \
         "(\$(NF-1) < $(($(tput lines) - 1))) && (\$NF < $(($columns - 2)))" \
-        "$nincat_list" | shuf | head -n1)"
+        "$root"/nincat_list | shuf | head -n1)"
 
       # NOTE : 4.3.2.1
       # This is only for a very small percentage of selected arts, which can
@@ -179,11 +168,9 @@ case "$1" in
 
     } || {
 
-      echo "nincat: The file list was not found on the root directory. nincat" \
-           "will try to create it by itself. If it doesn't work, try" \
-           "running 'nincat update'."
-      "$path_script/nincat" '--update' && exec "$path_script/nincat" '--random'
-      
+      echo "nincat: The file list was not found on the root directory. Try" \
+           "running 'nincat --update'."
+
     }
 
     # NOTE : 4.3.3
@@ -237,19 +224,20 @@ case "$1" in
   # Update command, it will update the list file with all the new art files.
   '--update' | '-u')
 
-    # NOTE : 4.5.1
+    # NOTE : 4.5.2
     # Print all the arts files that it finds with the `find` command, it will
     # print the name after the root directory. This may be useful to the day
     # that we add a `.ignorearts` file to keep updating without overriding the
     # art that we changed or updated. Verify if the file exists and then put
     # it path if it does.
     # The grep command will remove the lines from the output that contain on
-    # the "ignore_nincat" file.
-    find "$arts_folder" -type f -size +0 | \
-      grep -Fvxf "$path_script"/ignore_nincat > "$nincat_list" \
+    # the "nincat_ignore" file.
+    find "$root"/ascii_arts -type f -size +0 | \
+      grep -Fvxf "$root"/nincat_ignore > "$root"/nincat_list \
     && echo "nincat: Updated file with list of arts." \
-    || echo "nincat: Failed to update file with list of arts, please share" \
-            "the log of the 'find' command (if there's any) on a new issue.\n"
+    || echo "nincat: Failed to update. This is probably because nincat cannot" \
+            "find the root folder, run make or set the environment variables:" \
+            "NINCAT_ROOT to the path where arts are stored."
 
     exit 0
 

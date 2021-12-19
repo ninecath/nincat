@@ -27,9 +27,8 @@
 + List all ASCII art's paths (by option);
 + Print the name of printed art (by option);
 + Modular folder containing the ASCII arts.
-+ Environment variables:
-+ + `NINCAT_ARTS_FOLDER`: Folder of the ASCII arts, current is `[path_of_script]/ascii_arts`
-+ + `NINCAT_ARTS_LIST` : File that contains ASCII art paths, current: `$HOME/.cache/nincat_list`
++ Environment variable:
++ + `NINCAT_ROOT`: Root of nincat's information, where it will store ASCII arts and etc. Default: `~/.cache/nincat/`
 
 ---
 
