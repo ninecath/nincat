@@ -20,18 +20,16 @@
 ## 🌟 Features:
 + Fast as it can be and lightweight;
 + Self adapt with the terminal size to print only ASCII arts that fit;
-+ Supports **lolcat** arts (if there's more programs like **lolcat**, we can support it, too :)
++ Supports any external program such as lolcat.
 + Supports HEX colour foreground/background arts and 256 colours, 88 colours, 16 colours;
 + Skip empty ASCII art files;
 + You can select an art directly (by option);
 + List all ASCII art's paths (by option);
 + Print the name of printed art (by option);
-+ We'll always give you more, baby!
-+ Use modular list of ASCCI arts with the paths to be faster (by option you can update).
 + Modular folder containing the ASCII arts.
 + Environment variables:
-+ + `NINCAT_ARTS_FOLDER`: Folder of the ASCII arts, current is /ascii_arts
-+ + `NINCAT_ARTS_LIST` : File that contains ASCII art paths, current: $HOME/.cache/nincat_list
++ + `NINCAT_ARTS_FOLDER`: Folder of the ASCII arts, current is `[path_of_script]/ascii_arts`
++ + `NINCAT_ARTS_LIST` : File that contains ASCII art paths, current: `$HOME/.cache/nincat_list`
 
 ---
 
@@ -95,22 +93,31 @@ I'd recommend, too, you putting the line in the top of your shell.
 
 ## Options
 
-Tree of arguments:
-
-+ `--random` or `-r` : print a random ASCII arts that fits in your terminal;
-  - `--see` or `-s` : prints the path of the ASCII art that it finds.
-+ `--list` or `-l` : print the path of all ASCII arts;
-+ `--view` or `-v` : view an ASCII art;
-  - `[path_of_file]` : the path of the ASCII art (use **list** in doubt).
-+ `--help` or `-h` : help list of commands;
-+ `--update` or `-u` : update the file list with all the arts.
+```
+nincat help with arguments in a tree list
+    --random [-r]            : show a random ASCII art
+ 			 --raw [-R]            : (optional) show the path of the art and description
+ 			 --center [-c]         : (optional) center the art
+ 			 --right [-r]          : (optional) put to the right the art
+    --list [-l]              : print the secondpath of all ASCII arts
+    --view [-v]              : print an ASCII art based on the secondpath
+ 			 [path_of_file]        : secondpath of the art to print
+          --raw [-R]         : (optional) show the secondpath of the art
+ 			    --center [-c]      : (optional) center the art
+ 			    --right [-r]       : (optional) put to the right the art
+ 		--help [-h]              : shows this
+ 		--update [-u]            : update the file list with all the arts.
+```
 
 ----
 
 ## 😪 Dependencies:
 + **lolcat** (optional)
-  - [Please, use its faster implantation](https://github.com/jaseg/lolcat)
-  - So, if you want to, you can disable this dependency by just removing the `ascii_arts/lolcat` folder in the root directory of `nincat`. And if you know a little bit of shell scripting, remove its condition on the script file.
+  - [Please, use its faster implantation](https://github.com/jaseg/lolcat) for performance.
+  - You can disable this dependency by just removing the `/ascii_arts/   _   lolcat` folder in the root directory of `nincat`.
++ **gay** (optional)
+  - [source](https://github.com/ms-jpq/gay)
+  - You can disable this dependency by just removing the `/ascii_arts/   _   gay` folder in the root directory of `nincat`.
 
 ----
 
@@ -118,15 +125,14 @@ Tree of arguments:
   <img align="center" src="/.github/new_art.png" alt="Preview of one ASCII art with lolcat."/>
 </p>
 
-## ✏️  Adding/creating new ASCII arts:
+## ✏️  Contributing/Adding ASCII arts:
 
-File names are made in this format: `<name-of-art> <rows-size-of-art> <columns-size-of-art>`. **Yes, it does contain spaces, do not forget it, it's important!** They are put in the `/ascii_arts/`. You can make a separate folder to add your own arts.
+File names are made in this format: `<name-of-art> <max-rows-size-of-art> <max-columns-size-of-art>`. **Yes, it does contain those last two spaces, do not forget it, it's important!** They are put in the `/ascii_arts/`. You can make a separate folder to add your own arts.
 
 \* If the art was made by another artist, please -- please -- add her/his name to the first line tagging him/her as the original artist, the maintainer (s) cannot verify each art being added and definitely that would show a little bit of kindness that can make a difference in this big universe. Thank you.
 
 Things to do while creating a new art:
-+ Each line without trailing spaces at the end;
-+ Use spaces (DO NOT USE TABS!!!);
++ Use spaces (DO NOT USE TABS!);
 
 Please, do not fill all the lines with spaces to close all columns. A good and simple example should be:
 ```
@@ -135,10 +141,9 @@ Please, do not fill all the lines with spaces to close all columns. A good and s
 : ) o_o ( :
 ```
 
-**Please, run the `fix_ascii_arts` script if you want to make sure your file is correctly put!**
+**Note:**
 
-Because If you do not want to count the rows and columns of your file, just run the update script called `/fix_ascii_arts` in the root path.
-If you added colours on you art, remember that you do not have to put a' reset colour' after it. nincat will do that for you.
+Since it is kinda hard adding colours and effects to it, I actually developed [a tool](ninecath.github.io/) to write easily ASCII arts. Here's its [source code](https://github.com/ninecath/ninecath.github.io/). It still in development, but it is far better than writing on a text editor.
 
 ##### Colours
 
