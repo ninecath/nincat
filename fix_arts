@@ -89,11 +89,11 @@ find "$origin_arts" -type f | \
 
       # Verify if the variable of rows are numbers
       # TODO: make a better way to fit both (I'm lazy now)
-      [ "$rows_art" -gt 0 ] || {
+      [ "$rows_art" -gt 0 ] 2>/dev/null || {
         # Echo error warning
         echo "$g[FILENAME]:$R '$art_path'" \
           "uses wrong filename's format for rows!" \
-          "Fixing it. Ignore the error above."
+          "Fixing it."
 
         # Get a new path based on the filesname, the dirname path and
         # obviously sed will get only the first name of your file,
@@ -115,10 +115,10 @@ find "$origin_arts" -type f | \
 
       # Verify if the variable of columns are numbers
       # TODO: make a better way to fit both (I'm lazy now)
-      [ "$columns_art" -gt 0 ] || {
+      [ "$columns_art" -gt 0 ] 2>/dev/null || {
         echo "$g[FILENAME]:$R '$art_path'" \
           "uses wrong filename's format for columns!" \
-          "Fixing it. Ignore the error above."
+          "Fixing it."
 
         # Get a new path based on the filesname, the dirname path and
         # obviously sed will get only the first name of your file, nothing 
