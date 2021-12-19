@@ -89,8 +89,7 @@ find "$origin_arts" -type f | \
 
       # Verify if the variable of rows are numbers
       # TODO: make a better way to fit both (I'm lazy now)
-      [ "$rows_art" -gt 0  ] || {
-
+      [ "$rows_art" -gt 0 ] || {
         # Echo error warning
         echo "$g[FILENAME]:$R '$art_path'" \
           "uses wrong filename's format for rows!" \
@@ -174,7 +173,7 @@ find "$origin_arts" -type f | \
 
 done
 
-"$origin_arts"/../nincat update
+#"$origin_arts"/../nincat --update
 
 # Just print out a little bit of information about nincat actually :)
 echo "fix_arts: nincat has the total of $(find "$origin_arts" -type f | wc -l) arts." \
