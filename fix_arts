@@ -40,7 +40,7 @@ find "$origin_arts" -type f | \
 
     # Remove all colours code of the art. This is important to count the real
     # value of columns later on. So, please do not remove the sed call!
-    art="$(sed -r 's/\\033\[(([[:digit:]]+;)+|)[[:digit:]]+m//g' "$art_path")"
+    art="$(sed -r 's/(\\033|)\[(([[:digit:]]+;)+|)[[:digit:]]+m//g' "$art_path")"
 									 
     # Obviously, if there's pure emptiness in the file, then we will move it.
     # Be careful with this because it won't count if there's a single
