@@ -41,7 +41,7 @@ Example with [paru](https://github.com/Morganamilo/paru):
 
 ```zsh
 paru -S nincat-git
-nincat random
+nincat --random --center
 ```
 
 ### By Github
@@ -50,7 +50,7 @@ Click in `Code` in this repository and then `Download ZIP`. Extract it using you
 ```zsh
 cd PUT_HERE_THE_PATH_OF_NINCAT
 make
-nincat random
+nincat --random --right
 ```
 
 ### By Git
@@ -60,7 +60,7 @@ From your terminal, you can clone in your preferred folder:
 git clone 'https://github.com/ninecath/nincat'
 cd nincat
 make
-nincat random
+nincat --random
 ```
 
 ### Loading it
