@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 #
 # VERSION:
-#   6.2
+#   6.3
 #
 # DESCRIPTION:
 #   This a simple script that loads an ASCII art centred in your terminal.
@@ -69,7 +69,13 @@ print_file () {
   [ "$2" = '--raw' ] || [ "$2" = '-R' ] || \
   [ "$3" = '--raw' ] || [ "$3" = '-R' ] || art="$(echo "$art" | sed 1d)"
 
-  # NOTE : 2.5
+  # NOTE: 2.5
+  # Bash has some specialities that makes this program's life harder.
+  # Famous bashishms it adds things that shouldn't for the shell and to get it out of the way,
+  # we have to change it works under the hood.
+  [ "$(ps -hp $$ | awk '{print $5}')" = "bash" ] && shopt -s xpg_echo
+
+  # NOTE : 2.6
   # If it finds 'lolcat' on the path, then print with the 'lolcat' random
   # If not, then it will printf normally with a reset colour and background
   # after the art.
@@ -83,7 +89,7 @@ print_file () {
   external_command="$(printf "$selected" | grep -oP '((?<=/   _   )\w+)')"
   [ $external_command ] \
     && echo "$art" | $external_command \
-    || echo "$art\033[1m"
+    || echo "$art"
 
   exit 0
 
