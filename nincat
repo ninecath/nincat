@@ -73,7 +73,7 @@ print_file () {
   # Bash has some specialities that makes this program's life harder.
   # Famous bashishms it adds things that shouldn't for the shell and to get it out of the way,
   # we have to change it works under the hood.
-  grep -q "$(ps -hp $$ | awk '{print $5}')" <<<"bash" && shopt -s xpg_echo
+  [ -n "$BASH_VERSION" ] && shopt -s xpg_echo
 
   # NOTE : 2.6
   # If it finds 'lolcat' on the path, then print with the 'lolcat' random
