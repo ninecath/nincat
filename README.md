@@ -1,6 +1,27 @@
-<p align="center">
-  <img src="/.github/preview.png" alt="Preview of one ASCII art in ST.">
-</p>
+<div align="center">
+  <pre style="background: none !important;white-space: nowrap!important;font-weight:bold!important;">
+             .,-:;//;:=,                
+          . :H@@@MM@M#H/.,+%;,          
+       ,/X+ +M@@M@MM%=,-%HMMM@X/,       
+     -+@MM; $M@@MH+-,;XMMMM@MMMM@+-     
+    ;@M@@M- XM@X;, -+XXXXXHHH@M@M#@/.   
+  ,%MM@@MH ,@%=            .---=-=:=,.  
+  =@#@@@MX .,              -%HX$$%%%+;  
+ =-./@M@M$                  .;@MMMM@MM: 
+ X@/ -$MM/                    .+MM@@@M$ 
+,@M@H: :@:                    . =X#@@@@-
+,@@@MMX, .                    /H- ;@M@M=
+.H@@@@M@+,                    @MM+..%#$.
+ /MMMM@MMH/.                  XM@MH; =; 
+  /%+%$XHH@$=              , .H@@@@MX,  
+   .=--------.           -%H.,@@@@@MX,  
+   .%MM@@@HHHXX$$$%+- .:$MMX =M@@MM%.   
+     =XMMM@MM@MM#H;,-+HMM@M+ /MMMX=     
+       ,:+$+-,/H#MMMMMMMMM@= =,         
+             =++%%%%+/:-.               
+<br>
+$ echo 'An useless but fun way to show text-based art!'</pre>
+</div>
 
 <p align="center"><b>Let's revive the ASCII art!</b></p>
 
@@ -17,106 +38,99 @@
   </a>
 </p>
 
-## 🌟 Features:
-+ Fast as it can be and lightweight;
-+ Self adapt with the terminal size to print only ASCII arts that fit;
+### Features:
++ Fast as it can be and lightweight.
++ Self adapt with the terminal size to print only ASCII arts that fit.
 + Supports any external program such as lolcat.
-+ Supports HEX colour foreground/background arts and 256 colours, 88 colours, 16 colours;
-+ Skip empty ASCII art files;
-+ You can select an art directly (by option);
-+ List all ASCII art's paths (by option);
-+ Print the name of printed art (by option);
++ Supports HEX colour foreground/background arts and 256 colours, 88 colours, 16 colours.
++ Skip empty ASCII art files.
++ You can select an art directly (by option).
++ List all ASCII art's paths (by option).
++ Print the name of printed art (by option).
 + Modular folder containing the ASCII arts.
-+ Environment variable:
-+ + `NINCAT_ROOT`: Root of nincat's information, where it will store ASCII arts and etc. Default: `~/.cache/nincat/`
++ Environment variable `NINCAT_ROOT`: as root of nincat's information, where it will be stored and read. Default: `~/.cache/nincat/`.
 
 ---
 
-## ⚡ Installing
+### Installing
 
-### Arch Linux (Manjaro, Artix, Arco...)
+#### Arch Linux (Manjaro, Artix, Arco...)
 
 With an AUR helper, you can install it with the package called `nincat-git`.
 Example with [paru](https://github.com/Morganamilo/paru):
 
 ```zsh
-paru -S nincat-git
-nincat --random --center
+# paru -S nincat-git
+$ nincat --random --center
 ```
 
-### By Github
+#### By Github
 
 Click in `Code` in this repository and then `Download ZIP`. Extract it using your favourite tool and then in your terminal: 
 ```zsh
-cd PUT_HERE_THE_PATH_OF_NINCAT
-make
-nincat --random --right
+$ cd PUT_HERE_THE_PATH_OF_NINCAT
+$ make
+$ nincat --random --right
 ```
 
-### By Git
+#### By Git
 
 From your terminal, you can clone in your preferred folder:
 ```zsh
-git clone 'https://github.com/ninecath/nincat'
-cd nincat
-make
-nincat --random
-```
-
-### Loading it
-
-Probably you want to put when your Terminal opens, that is, when your shell is loaded. If you don't care a lot about shells, you probably use `bash`, maybe `zsh` with `Oh my zsh`.
-Anyway, all you need to do is add this line in your shell **rc** changing the location for `nincat` script, then you'll be able to load it when the terminal opens :)
-To verify what shell you use, run `echo $SHELL` in your terminal.
-
-+ For `zsh` the	rc is put in `~/.zshrc`;
-+ For `bash` the rc is put in `~/.bashrc`;
-+ For `fish` the config is put in `~/.config/fish/config.fish`;
-+ etc... search for the documentation of your shell if it isn't listed here.
-
-```zsh
-nincat random
-```
-
-**TIP**: Faster is better, if you have the `dash` shell installed in your machine, consider using it (it's 4x faster than bash and considered the fastest shell) with the following line:
-```zsh
-which nincat
-dash LOCATION_OF_NINCAT random
-```
-
-In **Arch Linux (...based ditros)** you can use `pacman -S dash` to install it.
-
-I'd recommend, too, you putting the line in the top of your shell.
-
-----
-
-## Options
-
-```
-nincat help with arguments in a tree list
-    --random [-r]            : show a random ASCII art
- 			 --raw [-R]            : (optional) show the path of the art and description
- 			 --center [-c]         : (optional) center the art
- 			 --right [-r]          : (optional) put to the right the art
-    --list [-l]              : print the secondpath of all ASCII arts
-    --view [-v]              : print an ASCII art based on the secondpath
- 			 [path_of_file]        : secondpath of the art to print
-          --raw [-R]         : (optional) show the secondpath of the art
- 			    --center [-c]      : (optional) center the art
- 			    --right [-r]       : (optional) put to the right the art
- 		--help [-h]              : shows this
- 		--update [-u]            : update the file list with all the arts.
+$ git clone 'https://github.com/ninecath/nincat'
+$ cd nincat
+$ make
+$ nincat --random
 ```
 
 ----
 
-## 😪 Dependencies:
-+ **lolcat** (optional)
-  - [Please, use its faster implantation](https://github.com/jaseg/lolcat) for performance.
-  - You can disable this dependency by just removing the `/ascii_arts/   _   lolcat` folder in the root directory of `nincat`.
-+ **gay** (optional)
-  - [source](https://github.com/ms-jpq/gay)
-  - You can disable this dependency by just removing the `/ascii_arts/   _   gay` folder in the root directory of `nincat`.
+### Tips
+
+#### Loading when your terminal emulator open.
+
+That is, when your shell is loaded. There are many shells out there, a very famous one is `bash`.
+
+Anyway, all you need to do is add one line in your shell-r that runs nincat, then you'll be able to load it when the terminal opens :)
+
+To verify what shell-rc you should have, run `echo $SHELL` in your terminal.
+
++ For `zsh` the	rc is put in `~/.zshrc`.
++ For `bash` the rc is put in `~/.bashrc`.
++ For `fish` the config is put in `~/.config/fish/config.fish`.
++ ...
+
+```zsh
+$ nincat --random
+```
+
+#### Faster loading.
+
+Faster is better, if you have the `dash` shell installed in your machine, consider using it (it's 4x faster than bash and considered the fastest shell) with the following line:
+```zsh
+$ which nincat
+$ dash LOCATION_OF_NINCAT --random
+```
+
+In **Arch Linux (...based ditros)** you can do `sudo pacman -S dash` to install it.
+
+I'd recommend, too, you putting the line in the top of your shell so that it loads first.
+
+#### Creating ASCII/ANSI/TEXT-BASED art.
+
+Tools that can be used to make easier this type of art can be found on Internet, here's a few of them:
+
+Tools:
++ [ninecath.github.io](https://github.com/ninecath/ninecath.github.io/) **[web]**
++ ...
+
+**Colours***
+
+[Give a look at this site for **256, 88, 16 colours** in your ASCII arts](https://misc.flogisoft.com/bash/tip_colors_and_formatting).
+And obviously, you should utilize `\033` instead of `\e`.
+
+For RGB colours, [I'd recommend this lecture-commentary](https://stackoverflow.com/questions/4842424/list-of-ansi-color-escape-sequences).
+
 
 ----
 
@@ -124,52 +138,49 @@ nincat help with arguments in a tree list
   <img align="center" src="/.github/new_art.png" alt="Preview of one ASCII art with lolcat."/>
 </p>
 
-## ✏️  Contributing/Adding ASCII arts:
+### Contributing/Adding ASCII arts:
 
-File names are made in this format: `<name-of-art> <max-rows-size-of-art> <max-columns-size-of-art>`. **Yes, it does contain those last two spaces, do not forget it, it's important!** They are put in the `/ascii_arts/`. You can make a separate folder to add your own arts.
+File names are made in this format: `<name-of-art> <max-rows-size-of-art> <max-columns-size-of-art>`.
+The spaces are important since we use them to rule out what arts should be printed.
 
-\* If the art was made by another artist, please -- please -- add her/his name to the first line tagging him/her as the original artist, the maintainer (s) cannot verify each art being added and definitely that would show a little bit of kindness that can make a difference in this big universe. Thank you.
-
-Things to do while creating a new art:
-+ Use spaces (DO NOT USE TABS!);
+The art files are put in the `/ascii_arts/`. You can make a separate folder to add your own arts. Of course, update the list after with:
+```she
+$ nincat --update
+```
 
 Please, do not fill all the lines with spaces to close all columns. A good and simple example should be:
+And do not use tabs, instead you should use spaces.
 ```
 # Your wonderful username/name and/or extra information
    (   )
 : ) o_o ( :
 ```
 
-**Note:**
-
-Since it is kinda hard adding colours and effects to it, I actually developed [a tool](ninecath.github.io/) to write easily ASCII arts. Here's its [source code](https://github.com/ninecath/ninecath.github.io/). It still in development, but it is far better than writing on a text editor.
-
-##### Colours
-
-[Give a look at this site for **256, 88, 16 colours** in your ASCII arts](https://misc.flogisoft.com/bash/tip_colors_and_formatting).
-And obviously, you should utilize `\033` instead of `\e`.
-
-For **true colours**, [I'd recommend this](https://stackoverflow.com/questions/4842424/list-of-ansi-color-escape-sequences).
-
-### 💞 Please, contribute!
+**Please, contribute!**
 
 It would be lovely that for every art you add, you add it here, too! Remember to put your name in the first line, so your contribution is never forgotten :)
 
-#### By Github's Pull Request (recommended)
+- By Github's Pull Request (recommended)
 
 Clone this project, add your art in a file in either manually with **Github** or with **git**, then send a pull request here comparing both branches.
 
-#### By Github's Issue
+- By Github's Issue
 
-Create a new issue in the `New art` option and put there your art.
+Create a new issue in the `New art` type of issue and put your art there.
 
-#### Literally email (not recommended, please)
+----
 
-Send an email to `koetemagie@gmail.com` with your art, do not forget to put your name in the first line and email. If you forgot, I will add it for you :)
+### Dependencies:
++ **lolcat** (optional)
+  - [You can use its faster implementation](https://github.com/jaseg/lolcat) for performance.
+  - You can disable this dependency by just renaming the `/ascii_arts/   _   lolcat` folder to anything else without the prefix `   _   ` in the root directory of `nincat`.
++ **gay** (optional)
+  - [source](https://github.com/ms-jpq/gay)
+  - You can disable this dependency by just renaming the `/ascii_arts/   _   gay` folder to anything else without the prefix `   _   ` in the root directory of `nincat`.
 
 ---
 
-## ❗ Acknowledgements:
+### Acknowledgements:
 
 You can find alternatives in the web, here are some with their initial commits:
 
