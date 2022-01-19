@@ -86,7 +86,11 @@ print_file () {
   # syntax: 
   #   "   _   folder_name"
   # because "folder_name" will be used as the command to call.
-  external_command="$(printf "$selected" | grep -oP '((?<=/   _   )\w+)')"
+  #
+  # Uncomment the below to run arts from folders that has external command.
+  # 
+  # This needs GNU coreutils GREP to perform this action.
+  #external_command="$(printf "$selected" | grep -oP '((?<=/   _   )\w+)')"
   [ $external_command ] \
     && echo "$art" | $external_command \
     || echo "$art"
