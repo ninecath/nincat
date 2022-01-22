@@ -20,106 +20,97 @@
 #
 # GPL3 🄯 2021 : https://github.com/ninecath/nincat/
 
-# NOTE : 1
-# Path of this script, it will use a fast and simple way to go to the path and
-# get from there using 'pwd -P'. If you want to set an absolute path, I'd 
-# recommend you to put in somewhere that you can update to get new arts!
-# Obviously if you call it with an environment variable, as `path_script`, it 
-# will override.
+# 1. Path of this script, it will use a fast and simple way to go to the path
+#    and get from there using 'pwd -P'. If you want to set an absolute path, I'd
+#    recommend you to put in somewhere that you can update to get new arts!
+#    Obviously if you call it with an environment variable, as `path_script`, it
+#    will override.
 path_script="$(cd -- "$(dirname "$0")" >/dev/null 2>&1 && pwd -P)"
 
-# NOTE : 2
-# Print the art in the terminal. It accepts two arguments which will define how we handle the output.
+# 2. Print the art in the terminal. It accepts two arguments which will define
+#    how we handle the output.
 print_file () {
 
-   # NOTE : 2.1
-  # This will print the art to a variable.
-  # Important execution order:
-  # 1. 'printf' will get columns of the filename with grep (faster than awk).
-  # 2. An operation will find the number to add characters to a line and
-  #    center it.
-  # 3. 'printf' will print the spaces to center the string with built-in loop.
-  # 4. 'grep' will append as prefix to all lines of the file. 
+  # 1. This will print the art to a variable.
+  #    Important execution order:
+  #      A. 'printf' will get columns of the filename with grep (faster than
+  #          awk).
+  #      B.  An operation will find the number to add characters to a line and
+  #          center it.
+  #      C. 'printf' will print the spaces to center the string with built-in 
+  #          loop.
+  #      D. 'grep' will append as prefix to all lines of the file.
   [ "$2" = '--center' ] || [ "$2" = '-c' ] || \
   [ "$3" = '--center' ] || [ "$3" = '-c' ] && {
 
     art="$(sed -e "s/^/$(printf %$(( \
-      ($1 - $(printf "$selected" | grep -oE '[^ ]+$')) / 2 ))s)/" -e '1 s/^ *//' "$selected")"
+      ($1 - $(printf "$selected" | grep -oE \
+      '[^ ]+$')) / 2 ))s)/" -e '1 s/^ *//' "$selected")"
 
-   # NOTE : 2.2
-  # This will print the art to a variable.
-  # Important execution order:
-  # 1. 'printf' will get columns of the filename with grep (faster than awk).
-  # 2. An operation will find the number to add characters to a line and
-  #    make it to the right.
-  # 3. 'printf' will print the spaces to left the string with built-in loop.
-  # 4. 'grep' will append as prefix to all lines of the file. 
+
+  # 2. This will print the art to a variable.
+  #    Important execution order:
+  #    A. 'printf' will get columns of the filename with grep (faster than awk).
+  #    B. An operation will find the number to add characters to a line and
+  #       make it to the right.
+  #    C. 'printf' will print the spaces to left the string with built-in loop.
+  #    D. 'grep' will append as prefix to all lines of the file. 
   }; [ "$2" = '--right' ] || [ "$2" = '-r' ] || \
      [ "$3" = '--right' ] || [ "$3" = '-r' ] && {
 
     art="$(sed -e "s/^/$(printf %$(( \
-      ($1 - $(printf "$selected" | grep -oE '[^ ]+$'))))s)/" -e '1 s/^ *//' "$selected")"
+      ($1 - $(printf "$selected" | grep -oE '[^ ]+$'))))s)/" -e '1 s/^ *//' \
+      "$selected")"
 
-   # NOTE : 2.3
-  # Just print the art as it is.
+  # 3. Just print the art as it is.
   }; [ "$art" = '' ] || [ "$2" = '' ] && art="$(cat "$selected")"
 
-  # NOTE : 2.4
-  # If raw mode is active, then do not remove the first line.
+  # 4 If raw mode is active, then do not remove the first line.
   [ "$2" = '--raw' ] || [ "$2" = '-R' ] || \
   [ "$3" = '--raw' ] || [ "$3" = '-R' ] || art="$(echo "$art" | sed 1d)"
 
-  # NOTE: 2.5
-  # Bash has some specialities that makes this program's life harder.
-  # Famous bashishms it adds things that shouldn't for the shell and to get it out of the way,
-  # we have to change it works under the hood.
+  # 5. Bash has some specialities that makes this program's life harder.
+  #    Famous bashishms it adds things that shouldn't for the shell and to get
+  #    it out of the way, we have to change echo works under the hood.
   [ -n "$BASH_VERSION" ] && shopt -s xpg_echo
 
-  # NOTE : 2.6
-  # If it finds 'lolcat' on the path, then print with the 'lolcat' random
-  # If not, then it will printf normally with a reset colour and background
-  # after the art.
-  # Change the 'lolcat' options if you want something different as some
-  # lolcat(s) have less/more options.
-  #  to avoid escaping at the end characters
-  # "external_command" serves as a fallback in case it finds a folder with the following
-  # syntax: 
-  #   "   _   folder_name"
-  # because "folder_name" will be used as the command to call.
+  # 6. 
+  #    A. "external_command" serves as a fallback in case it finds a folder with
+  #       the following syntax: "   _   folder_name".
+  #       because "folder_name" will be used as the command to call.
+  #       Uncomment the below to run arts from folders that has external
+  #       command. It needs GNU coreutils GREP to perform this action.
   #
-  # Uncomment the below to run arts from folders that has external command.
-  # 
-  # This needs GNU coreutils GREP to perform this action.
   #external_command="$(printf "$selected" | grep -oP '((?<=/   _   )\w+)')"
-  [ $external_command ] \
-    && echo "$art" | $external_command \
-    || echo "$art"
+  #[ $external_command ] \
+  #  && echo "$art" | $external_command \
+  #  || echo "$art"
+  #
+  #    B. Just print the art.
+  echo "$art"
 
   exit 0
 
 }
 
-# NOTE: 3
-# Environment variables that nincat accepts.
-# NINCAT_ROOT : Root of nincat information.
+# 3. Environment variables that nincat accepts.
+#    A. NINCAT_ROOT : Root of nincat information, such as the ascii_arts folder,
+#       and nincat_ignore file.
 [ "$NINCAT_ROOT" ] \
   && root="$NINCAT_ROOT" \
   || root="$HOME"/.cache/nincat
 
-# NOTE : 4
-# This maybe the most effective way to accept options, so I highly doubt there
-# will be any changes here. As you can see, the first argument decides how the
-# entire script will be loaded. You can call to load only the art with
-# `/nincat random` or `/nincat r`.
+# 4. This maybe the most effective way to accept options, so I highly doubt
+#    there will be any changes here. As you can see, the first argument decides
+#    how the entire script will be loaded. You can call to load only the art
+#    with `/nincat random` or `/nincat r`.
 case "$1" in
 
-  # NOTE : 4.1
-  # This option will show the secondpath of all ASCII arts files that nincat can
-  # find.
+  # 1. This option will show the secondpath of all ASCII arts files that nincat can
+  #    find.
   '--list' | '-l')
 
-    # NOTE : 4.1.1
-    # Print all the art files of the list file.
+    # A. Print all the art files of the list file.
     cat "$root"/nincat_list 2>/dev/null || {
 
       echo "nincat: The file list was not found on the root directory. Try" \
@@ -131,51 +122,44 @@ case "$1" in
 
   ;;
 
-  # NOTE : 4.2
-  # This will show an ASCII art based on the secondpath that is given.
+  # 2. This will show a specific ASCII art with the given path.
   '--view' | '-v')
-  
-    # NOTE : 4.2.1
-    # If there's an file (which is the argument), then see if it exists.
+
+    # A. If there's an file (which is the argument), then see if it exists.
     [ -f "$2" ] || {
+
       echo "nincat: specify the path of your art, if you don't know" \
            "then run 'nincat --list'."; exit 1
+
+    # B. Make the selected art if it exists.
     } && selected="$2"
 
-    # NOTE : 4.2.2
-    # Send columns of the terminal to `print_file` (print ASCII art function). See
-    # note 2 about it.
+    # C. Send columns of the terminal to `print_file` (print ASCII art function)
     print_file $(tput cols) "$3" "$4"
 
   ;;
 
-  # NOTE : 4.3
-  # This will probably the option that will be often used, this prints an ASCII
-  # art randomly that fits in your terminal.
+  # 3. This will be the option that will be more often used, this prints a
+  #    random art ASCII from nincat_list `nincat --list`.
   '--random' | '-r')
 
-    # NOTE : 4.3.1
-    # Pass columns of terminal to variable to be used twice here.
+    # A. Pass columns of terminal to variable to be used twice in here.
     columns=$(tput cols)
 
-    # NOTE : 4.3.2
-    # Select a random art that fits in the terminal size.
-    # 1. 'awk' will get only the files that can fit in this terminal based only
-    #    the name;
-    # 2. 'shuf' will randomize the list
-    # 3. 'head' will get the first file of the list.
+
+    # B. If nincat_list exists.
     [ -f "$root"/nincat_list ] && {
-      
+
+      # I. Select a random art that fits in the terminal size.
+      #    1. 'awk' will get only the matches that can fit in this terminal
+      #        based only on the last two numbers of the filename.
+      #    2. 'shuf' will randomize the remaining list.
+      #    3. 'head' will get the first match of the list.
       selected="$(awk \
         "(\$(NF-1) < $(($(tput lines) - 1))) && (\$NF < $(($columns - 2)))" \
         "$root"/nincat_list | shuf | head -n1)"
 
-      # NOTE : 4.3.2.1
-      # This is only for a very small percentage of selected arts, which can
-      # happen when the terminal is so small, but so small that even nincat
-      # will simply ignore all arts on the path.
-      [ "" != "$selected" ] || exit 0
-
+    # C. If nincat_list does not exists.
     } || {
 
       echo "nincat: The file list was not found on the root directory. Try" \
@@ -183,71 +167,72 @@ case "$1" in
 
     }
 
-    # NOTE : 4.3.3
-    # This block of code will only execute if an ASCII art is found, note that
-    # it you can added a command to exit with an error, like it didn't find
-    # something with '|| exit 1' at the end of the block or after this
-    # condition in the next line.
-    # Send columns of the terminal to `print_file` (print ASCII art function). see
+    # D. This block of code will only execute if "selected" has a value.
     [ "$selected" ] && {
 
-      # NOTE : 4.3.3.1
-      # Print the name of the file, you can add $NF to print certain fields, if
-      # you just want the name, remove the $(NF-2), $(NF-1) for that.
-      # If you want the full path, remove the sed call in the following 2 lines
-      [ "$2" = '--raw' ] || [ "$2" = '-r' ] || \
-      [ "$3" = '--raw' ] || [ "$3" = '-r' ] && printf "$selected\n" | head -n1
-      
+      # I. Print the name of the file, you can add $NF to print certain fields,
+      #    if you just want the name, use the `basename` command instead of
+      #    echo.
+      [ "$2" = '--raw' ] || [ "$2" = '-R' ] || \
+      [ "$3" = '--raw' ] || [ "$3" = '-R' ] && echo "$selected"
+
+      # II. Print the name of the file, without the numbers at the end.
+      #basename "$selected" | awk '{print $1}'
+
+      # III. Print the art.
       print_file $columns "$2" "$3"
 
     }
 
-    # echo "nincat: did not find any ASCII art that fits :("
-    exit 1
-    
+    # D. This is only for a very small percentage of selected arts, which can
+    #    happen when the terminal is so small, so small nincat won't find any
+    #    art that matches and just exit normally.
+    exit 0
+
   ;;
 
-  # NOTE : 4.4
-  # Help command, show a list with what can be run by nincat and version.
+  # 4. Show a help list.
   '--help' | '-h')
 
     echo \
       "\033[1mnincat help with arguments in a tree list\033[0m\n" \
-      "   --random [-r]            : show a random ASCII art\n" \
-			"			 --raw [-R]            : (optional) show the path of the art and description\n" \
-			"			 --center [-c]         : (optional) center the art\n" \
-			"			 --right [-r]          : (optional) put to the right the art\n" \
-      "   --list [-l]              : print the secondpath of all ASCII arts\n" \
-      "   --view [-v]              : print an ASCII art based on the secondpath\n" \
-      "			 [path_of_file]        : secondpath of the art to print\n" \
-      "         --raw [-R]         : (optional) show the secondpath of the art\n" \
-			"			    --center [-c]      : (optional) center the art\n" \
-			"			    --right [-r]       : (optional) put to the right the art\n" \
-      "		--help [-h]              : shows this\n" \
-      "		--update [-u]            : update the file list with all the arts."
+      "  --random [-r]         : show a random ASCII art\n" \
+      "    --raw [-R]          : (optional) show the path of the art and description\n" \
+      "    --center [-c]       : (optional) center the art\n" \
+      "    --right [-r]        : (optional) put to the right the art\n" \
+      "  --list [-l]           : print the secondpath of all ASCII arts\n" \
+      "  --view [-v]           : print an ASCII art based on the secondpath\n" \
+      "    [path_of_file]      : secondpath of the art to print\n" \
+      "      --raw [-R]        : (optional) show the secondpath of the art\n" \
+      "      --center [-c]     : (optional) center the art\n" \
+      "      --right [-r]      : (optional) put to the right the art\n" \
+      "  --help [-h]           : shows this\n" \
+      "  --update [-u]         : update the file list with all the arts."
 
     exit 0
 
   ;;
-  
-  # NOTE : 4.5
-  # Update command, it will update the list file with all the new art files.
+
+  # 5. Update/create a list file from the ascii_arts folder recursively.
   '--update' | '-u')
 
-    # NOTE : 4.5.2
-    # Print all the arts files that it finds with the `find` command, it will
-    # print the name after the root directory. This may be useful to the day
-    # that we add a `.ignorearts` file to keep updating without overriding the
-    # art that we changed or updated. Verify if the file exists and then put
-    # it path if it does.
-    # The grep command will remove the lines from the output that contain on
-    # the "nincat_ignore" file.
+    # A. In followup explanation:
+    #    I. `find` will search for all files that contain something and print
+    #        them.
+    #    II. `grep` will exclue all the lines that are contained on
+    #        nincat_ignore.
     find "$root"/ascii_arts -type f -size +0 | \
-      grep -Fvxf "$root"/nincat_ignore > "$root"/nincat_list \
-    && echo "nincat: Updated file with list of arts." \
-    || echo "nincat: Failed to update. This is probably because nincat cannot" \
-            "find the root folder, run make or set the environment variables:" \
-            "NINCAT_ROOT to the path where arts are stored."
+      grep -Fvxf "$root"/nincat_ignore > "$root"/nincat_list && { 
+
+      echo "nincat: Updated file with list of arts."
+
+    } || {
+
+      echo "nincat: Failed to update. This is probably because nincat cannot" \
+           "find the root folder, run make or set the environment variables:" \
+           "NINCAT_ROOT to the path where arts are stored."
+
+    }
 
     exit 0
 
@@ -255,7 +240,6 @@ case "$1" in
 
 esac
 
-# NOTE : 5
-# If nincat is not called with any argument, then just gives a warning. This
-# only happens when nincat does not exit before.
-echo "nincat: you need to call me with something! Try 'nincat --help'."; exit 1
+# 5. If nincat is not called with any argument, then just gives a warning.
+echo "nincat: you need to call me with something! Try 'nincat --help'."
+exit 1
