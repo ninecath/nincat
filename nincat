@@ -20,14 +20,7 @@
 #
 # GPL3 🄯 2021 : https://github.com/ninecath/nincat/
 
-# 1. Path of this script, it will use a fast and simple way to go to the path
-#    and get from there using 'pwd -P'. If you want to set an absolute path, I'd
-#    recommend you to put in somewhere that you can update to get new arts!
-#    Obviously if you call it with an environment variable, as `path_script`, it
-#    will override.
-path_script="$(cd -- "$(dirname "$0")" >/dev/null 2>&1 && pwd -P)"
-
-# 2. Print the art in the terminal. It accepts two arguments which will define
+# 1. Print the art in the terminal. It accepts two arguments which will define
 #    how we handle the output.
 print_file () {
 
@@ -93,14 +86,14 @@ print_file () {
 
 }
 
-# 3. Environment variables that nincat accepts.
+# 2. Environment variables that nincat accepts.
 #    A. NINCAT_ROOT : Root of nincat information, such as the ascii_arts folder,
 #       and nincat_ignore file.
 [ "$NINCAT_ROOT" ] \
   && root="$NINCAT_ROOT" \
   || root="$HOME"/.cache/nincat
 
-# 4. This maybe the most effective way to accept options, so I highly doubt
+# 3. This maybe the most effective way to accept options, so I highly doubt
 #    there will be any changes here. As you can see, the first argument decides
 #    how the entire script will be loaded. You can call to load only the art
 #    with `/nincat random` or `/nincat r`.
@@ -177,7 +170,7 @@ case "$1" in
       [ "$3" = '--raw' ] || [ "$3" = '-R' ] && echo "$selected"
 
       # II. Print the name of the file, without the numbers at the end.
-      #basename "$selected" | awk '{print $1}'
+      basename "$selected" | awk '{print $1}'
 
       # III. Print the art.
       print_file $columns "$2" "$3"
@@ -240,6 +233,6 @@ case "$1" in
 
 esac
 
-# 5. If nincat is not called with any argument, then just gives a warning.
+# 4. If nincat is not called with any argument, then just gives a warning.
 echo "nincat: you need to call me with something! Try 'nincat --help'."
 exit 1
