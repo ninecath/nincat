@@ -170,7 +170,7 @@ case "$1" in
       [ "$3" = '--raw' ] || [ "$3" = '-R' ] && echo "$selected"
 
       # II. Print the name of the file, without the numbers at the end.
-      basename "$selected" | awk '{print $1}'
+      #basename "$selected" | awk '{print $1}'
 
       # III. Print the art.
       print_file $columns "$2" "$3"
