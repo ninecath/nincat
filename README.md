@@ -87,6 +87,22 @@ $ nincat --random
 
 ### Tips
 
+#### List all arts.
+
+Some people may like or not a few arts, to remove you either take out the ASCII art-file or add it into a list to ignore it on `$NINCAT_ROOT/nincat_ignore`.
+
+For example, if you don't like the Portal's ASCII art, just add the path to it!
+
+```
+....../nincat/ascii_arts/games/portal 19 40
+```
+
+Then run this again to update the list.
+
+```zsh
+$ nincat --update
+```
+
 #### Loading when your terminal emulator open.
 
 That is, when your shell is loaded. There are many shells out there, a very famous one is `bash`.
