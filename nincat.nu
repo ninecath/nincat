@@ -90,9 +90,15 @@ export def random [
 	let data = open $database
 		| random item
 
-	open --raw $data.path
-	| str replace --regex `.*\n` ``
+	let art = open --raw $data.path
+
+	if $author {
+		$art
+	} else {
+		$art
+		| str replace --regex `.*\n` ``
+		# ^ Remove the first line (authority).
+	}
 	| str substring ..-1
-	# ^ Remove the first line (author).
 	# ^ Remove the last newline.
 }
