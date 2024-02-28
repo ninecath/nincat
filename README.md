@@ -48,12 +48,12 @@ $ echo 'An useless but fun way to show text-based art!'</pre>
 + List all ASCII art's paths (by option).
 + Print the name of printed art (by option).
 + Modular folder containing the ASCII arts.
-+ Environment variable `NINCAT_ROOT`: as root of nincat's information, where it will be stored and read. Default: `~/.cache/nincat/`.
 
 ---
 
 ### Installing
 
+<!--
 #### Arch Linux (Manjaro, Artix, Arco...)
 
 With an AUR helper, you can install it with the package called `nincat-git`.
@@ -63,33 +63,34 @@ Example with [paru](https://github.com/Morganamilo/paru):
 # paru -S nincat-git
 $ nincat --random --center
 ```
+-->
 
 #### By Github
 
 Click in `Code` in this repository and then `Download ZIP`. Extract it using your favourite tool and then in your terminal: 
-```zsh
-$ cd PUT_HERE_THE_PATH_OF_NINCAT
-$ make
-$ nincat --random --right
+```nu
+> cd PUT_HERE_THE_PATH_OF_NINCAT
+> nincat random
 ```
 
 #### By Git
 
 From your terminal, you can clone in your preferred folder:
-```zsh
-$ git clone 'https://github.com/ninecath/nincat'
-$ cd nincat
-$ make
-$ nincat --random
+```nu
+> git clone 'https://github.com/ninecath/nincat'
+> cd nincat
+> use ./nincat.nu
+> nincat random
 ```
 
 ----
 
 ### Tips
 
+<!--
 #### List all arts.
 
-Some people may like or not a few arts, to remove you either take out the ASCII art-file or add it into a list to ignore it on `$NINCAT_ROOT/nincat_ignore`.
+Some people may like or not a few arts, to remove you either take out the ASCII art-file or add it into a list to ignore it on `./ignore.txt`.
 
 For example, if you don't like the Portal's ASCII art, just add the path to it!
 
@@ -99,9 +100,10 @@ For example, if you don't like the Portal's ASCII art, just add the path to it!
 
 Then run this again to update the list.
 
-```zsh
-$ nincat --update
+```nu
+> nincat setup
 ```
+-->
 
 #### Loading when your terminal emulator open.
 
@@ -109,36 +111,26 @@ That is, when your shell is loaded. There are many shells out there, a very famo
 
 Anyway, all you need to do is add one line in your shell-r that runs nincat, then you'll be able to load it when the terminal opens :)
 
-To verify what shell-rc you should have, run `echo $SHELL` in your terminal.
+To verify what shell-rc you should have, run `$env.SHELL` or `echo $SHELL` (POSIX) in your terminal.
 
-+ For `zsh` the	rc is put in `~/.zshrc`.
-+ For `bash` the rc is put in `~/.bashrc`.
-+ For `fish` the config is put in `~/.config/fish/config.fish`.
-+ ...
++ For `zsh` the	rc is put in `~/.zshrc`;
++ For `bash` the rc is put in `~/.bashrc`;
++ For `fish` the config is put in `~/.config/fish/config.fish`;
++ For `nu` the config is put in `~/.config/nushell/config.nu`.
 
-```zsh
-$ nincat --random
+```nu
+> nincat random
 ```
-
-#### Faster loading.
-
-Faster is better, if you have the `dash` shell installed in your machine, consider using it (it's 4x faster than bash and considered the fastest shell) with the following line:
-```zsh
-$ which nincat
-$ dash LOCATION_OF_NINCAT --random
-```
-
-In **Arch Linux (...based ditros)** you can do `sudo pacman -S dash` to install it.
-
-I'd recommend, too, you putting the line in the top of your shell so that it loads first.
 
 #### Creating ASCII/ANSI/TEXT-BASED art.
 
 Tools that can be used to make easier this type of art can be found on Internet, here's a few of them:
 
+<!--
 Tools:
 + [ninecath.github.io](https://github.com/ninecath/ninecath.github.io/) **[web]**
 + ...
+-->
 
 **Colours***
 
@@ -151,23 +143,23 @@ For RGB colours, [I'd recommend this lecture-commentary](https://stackoverflow.c
 ----
 
 <p align="center">
-  <img align="center" src="/.github/new_art.png" alt="Preview of one ASCII art with lolcat."/>
+  <img align="center" src="./.github/gimp_art.png" alt="Preview of one ASCII art with lolcat."/>
 </p>
 
 ### Contributing/Adding ASCII arts:
 
-File names are made in this format: `<name-of-art> <max-rows-size-of-art> <max-columns-size-of-art>`.
+File names are made in this format: `<name-of-art>`.
 The spaces are important since we use them to rule out what arts should be printed.
 
-The art files are put in the `/ascii_arts/`. You can make a separate folder to add your own arts. Of course, update the list after with:
+The art files are put in the [`/assets/`](./assets). You can make a separate folder to add your own arts. Of course, update the list after with:
 ```she
-$ nincat --update
+$ nincat setup
 ```
 
 Please, do not fill all the lines with spaces to close all columns. A good and simple example should be:
 And do not use tabs, instead you should use spaces.
 ```
-# Your wonderful username/name and/or extra information
+# Your wonderful username/name and/or extra information about authority (author).
    (   )
 : ) o_o ( :
 ```
@@ -187,12 +179,15 @@ Create a new issue in the `New art` type of issue and put your art there.
 ----
 
 ### Dependencies:
++ **nushell**
+<!--
 + **lolcat** (optional)
   - [You can use its faster implementation](https://github.com/jaseg/lolcat) for performance.
   - You can disable this dependency by just renaming the `/ascii_arts/   _   lolcat` folder to anything else without the prefix `   _   ` in the root directory of `nincat`.
 + **gay** (optional)
   - [source](https://github.com/ms-jpq/gay)
   - You can disable this dependency by just renaming the `/ascii_arts/   _   gay` folder to anything else without the prefix `   _   ` in the root directory of `nincat`.
+-->
 
 ---
 
@@ -200,13 +195,12 @@ Create a new issue in the `New art` type of issue and put your art there.
 
 You can find alternatives in the web, here are some with their initial commits:
 
-+ [ASCII Art](https://github.com/Tianwei-Li/ascii_art) (2013/02)
-+ [ShASCII](https://github.com/oskargicast/shascii) (2014/05)
-+ [Art Splash Screen](https://github.com/DanCRichards/ASCII-Art-Splash-Screen) (2017/11)
-+ Inspired by [shell-colors-scripts](https://gitlab.com/dwt1/shell-color-scripts/) (2018/02)
-+ [TerminalWelcome](https://github.com/devarshi16/TerminalWelcome) (2019/03)
-+ [nincat](https://github.com/BeyondMagic/nincat/) (2021/04)
-+ [pokemon-colorscripts](https://gitlab.com/phoneybadger/pokemon-colorscripts/) (2021/08)
++ [ASCII Art](https://github.com/Tianwei-Li/ascii_art) (2013/02);
++ [ShASCII](https://github.com/oskargicast/shascii) (2014/05);
++ [Art Splash Screen](https://github.com/DanCRichards/ASCII-Art-Splash-Screen) (2017/11);
++ Inspired by [shell-colors-scripts](https://gitlab.com/dwt1/shell-color-scripts/) (2018/02);
++ [TerminalWelcome](https://github.com/devarshi16/TerminalWelcome) (2019/03);
++ [pokemon-colorscripts](https://gitlab.com/phoneybadger/pokemon-colorscripts/) (2021/08).
 
 ---
 

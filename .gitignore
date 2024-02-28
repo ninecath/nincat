@@ -1,10 +1,2 @@
-wrong_arts
-PKGBUILD
-.SRCINFO
-src
-*.zst
-pkg
-nincat-git
-nincat_list
-preview.xcf
-preview.png
+# Source templates of art and design.
+./.github/*.xcf
