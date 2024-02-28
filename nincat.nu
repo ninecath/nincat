@@ -92,9 +92,16 @@ export def random [
 	--author = false # Show author or not.
 ] : nothing -> string {
 	let data = open $database
-		| random item
 
-	let art = open --raw $data.path
+	# Get random item from data.
+	let item = $data
+		| get (
+			random int 0..(
+				($data | length) - 1
+			)
+		)
+
+	let art = open --raw $item.path
 
 	if $author {
 		$art
