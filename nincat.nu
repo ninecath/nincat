@@ -80,11 +80,16 @@ export def setup [
 }
 
 # Return an random art.
+#
+# TODO:
+#	- Do not print arts bigger than the terminal.
+#	--limit = false
+#
+#	Alignment of the arg in the terminal.
+#	--align@[left center right]
 export def random [
 	database : string = $default.database # Database of the arts.
 	--author = false # Show author or not.
-	# --align@[left center right] # Alignment of the arg in the terminal.
-	# --limit = false # Do not print arts bigger than the terminal.
 ] : nothing -> string {
 	let data = open $database
 		| random item
