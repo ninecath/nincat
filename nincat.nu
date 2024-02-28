@@ -47,8 +47,7 @@ export def setup [
 
 		let tags = $path
 			| path split
-			| drop 1
-			| skip 1
+			| range 1..-2
 
 		let author = $data
 			| first
