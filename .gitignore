@@ -1,2 +1,5 @@
 # Source templates of art and design.
-./.github/*.xcf
+/.github/*.xcf
+
+# Remove setup of ASCII arts.
+/data.json
