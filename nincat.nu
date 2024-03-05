@@ -46,8 +46,8 @@ export def setup [
 			| lines
 
 		let tags = $path
-			| path split
-			| range 1..-2
+			| split row --regex '/| '
+			| skip 1
 
 		let author = $data
 			| first
