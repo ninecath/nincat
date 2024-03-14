@@ -38,7 +38,7 @@ export def setup [
 	database : string = $default.database # Database of the arts.
 	--assets : string = $default.assets # Where to look for the ASCII arts.
 ] : nothing -> nothing {
-	ls $assets
+	ls ($assets | into glob)
 	| where type != dir
 	| get name
 	| par-each {|path|
