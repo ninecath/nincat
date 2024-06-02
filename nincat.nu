@@ -110,6 +110,6 @@ export def random [
 		| str replace --regex `.*\n` ``
 		# ^ Remove the first line (authority).
 	}
-	| str substring ..-1
+	| str substring ..-2
 	# ^ Remove the last newline.
 }
