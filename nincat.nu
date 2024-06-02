@@ -103,13 +103,13 @@ export def random [
 
 	let art = open --raw $item.path
 
-	if $author {
+	(if $author {
 		$art
 	} else {
 		$art
 		| str replace --regex `.*\n` ``
 		# ^ Remove the first line (authority).
-	}
+	}) + (ansi reset)
 	| str substring ..-2
 	# ^ Remove the last newline.
 }
